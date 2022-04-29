@@ -4,8 +4,9 @@
 */
 
 #include "stdio.h"
-
 #include "unistd.h"
+
+#include "branch.h"
 
 mu64_t 
 O_fwrite
@@ -23,3 +24,12 @@ O_fwrite
   return (writed);  
 }
 
+/* Returns the file descriptor associated with the O_FILE IO structure */
+i32_t
+O_fileno
+(const O_FILE *stream)
+{
+  unlikely (stream != NULL)
+    return (-1);
+  return (__STATIC_O_FILENO(stream));
+}

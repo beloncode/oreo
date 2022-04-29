@@ -23,5 +23,13 @@ extern O_FILE *stdout;
 
 extern mu64_t O_fwrite(const u0_t *ptr, mu64_t size, mu64_t nmemb, O_FILE *stream);
 
+#define STDOUT_FILENO 0
+#define STDIN_FILENO  1
+
+#define __STATIC_O_FILENO(stream)\
+  stream->fd
+
+extern i32_t O_fileno(const O_FILE *stream);
+
 #endif
 

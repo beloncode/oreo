@@ -10,6 +10,7 @@
 
 #define SYS_EXIT    0x3c
 #define SYS_WRITE   0x01
+#define SYS_POLL    0x07
 
 #endif
 

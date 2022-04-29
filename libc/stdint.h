@@ -10,6 +10,10 @@
 typedef int i32_t;
 #endif
 
+#ifndef i16_t
+typedef short i16_t;
+#endif
+
 #ifndef u64_t
 typedef unsigned long u64_t;
 #endif

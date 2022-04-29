@@ -50,7 +50,8 @@ LIBC_OBJS=\
 	libc/mutex.o\
 	libc/stdin.o\
 	libc/stdout.o\
-	libc/stdio.o
+	libc/stdio.o\
+	libc/poll.o
 
 LIBRARIES=\
 	$(LIBC_LIB)
