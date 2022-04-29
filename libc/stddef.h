@@ -3,7 +3,6 @@
  * Create at: 2022/04/27
 */
 
-
 #ifndef LIBC_STDDEF_H
 #define LIBC_STDDEF_H
 
@@ -25,6 +24,13 @@ typedef unsigned char uchar_t;
 typedef unsigned long u64ptr_t;
 #endif
 
+#ifndef mu64_t
+typedef unsigned long mu64_t;
+#endif
+
+#ifndef mi64_t
+typedef signed long mi64_t;
+#endif
 
 #endif
 

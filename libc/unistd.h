@@ -10,5 +10,7 @@
 
 extern u0_t exit(i32_t code) __attribute__((noreturn));
 
+extern mi64_t write(i32_t fd, const u0_t *buf, mu64_t count);
+
 #endif
 

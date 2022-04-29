@@ -24,4 +24,11 @@ exit
   __builtin_unreachable();
 }
 
+mi64_t
+write
+(i32_t fd, const u0_t *buf, mu64_t count)
+{
+  return ((mi64_t)__syscall3(SYS_WRITE, fd, (u64_t)buf, count));
+}
+
 

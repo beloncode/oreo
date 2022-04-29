@@ -47,7 +47,10 @@ LIBC_OBJS=\
 	libc/strrchr.o\
 	libc/unistd.o\
 	libc/stdlib.o\
-	libc/mutex.o
+	libc/mutex.o\
+	libc/stdin.o\
+	libc/stdout.o\
+	libc/stdio.o
 
 LIBRARIES=\
 	$(LIBC_LIB)
