@@ -13,7 +13,7 @@
 
 /* Address of the initial code segment */
 extern u64ptr_t __text__start;
-/* Addres of the end */
+/* Address of the end */
 extern u64ptr_t __text_end;
 
 extern i32_t O_main(i32_t, char_t**);
@@ -52,7 +52,7 @@ O__libc_start_main
       struct O_pollfd *test = &std_IO__poll[count_poll];
       i16_t request = test->revents;
       
-      if (TEST_SPECIFIC_BIT(request, POLLERR) || TEST_SPECIFIC_BIT(request, POLLNVAL)) {
+      if (TEST_SPECIFIC_BIT(request, (POLLERR | POLLNVAL))) {
         exit(request);
       }
     }

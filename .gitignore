@@ -1,3 +1,5 @@
 peda*
 *.o
 *.a
+bin/*
+lib/*

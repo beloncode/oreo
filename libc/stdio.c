@@ -13,6 +13,9 @@ O_fwrite
 (const u0_t *ptr, mu64_t size, mu64_t nmemb, O_FILE *stream)
 {
   MUTEX_LOCK(&stream->file_lock);
+
+  unlikely (stream == NULL || ptr == NULL)
+    return (-1);
   
   mu64_t writed = 0;
 
@@ -29,7 +32,7 @@ i32_t
 O_fileno
 (const O_FILE *stream)
 {
-  unlikely (stream != NULL)
+  unlikely (stream == NULL)
     return (-1);
   return (__STATIC_O_FILENO(stream));
 }

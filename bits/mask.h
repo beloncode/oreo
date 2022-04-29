@@ -3,9 +3,9 @@
 
 /* 
   101001
-  001000
-  &
-  001000
+  001000 ---|
+  &=        |
+  001000 ---|
 */
 
 #define TEST_SPECIFIC_BIT(value,bit_mask)\

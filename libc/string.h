@@ -11,6 +11,8 @@
 extern char_t* O_strrchr(const char_t* dest, i32_t character)
   __attribute__((nonnull(1)));
 
+extern mu64_t O_strlen(const char_t *dest);
+
 #endif
 
 

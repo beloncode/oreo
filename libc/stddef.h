@@ -32,5 +32,13 @@ typedef unsigned long mu64_t;
 typedef signed long mi64_t;
 #endif
 
+#ifndef i8_t
+typedef signed char i8_t;
+#endif
+
+#ifndef u8_t
+typedef unsigned char u8_t;
+#endif
+
 #endif
 

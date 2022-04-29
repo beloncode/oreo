@@ -51,7 +51,8 @@ LIBC_OBJS=\
 	libc/stdin.o\
 	libc/stdout.o\
 	libc/stdio.o\
-	libc/poll.o
+	libc/poll.o\
+	libc/strlen.o
 
 LIBRARIES=\
 	$(LIBC_LIB)

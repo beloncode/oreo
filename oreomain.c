@@ -5,13 +5,14 @@
 
 #include "libc/stddef.h"
 #include "libc/stdio.h"
+#include "libc/string.h"
 
 i32_t
 O_main
 (u0_t)
 {
   const char_t hello[] = "Hello world\n";
-  O_fwrite(hello, sizeof(hello), 10, stdout);
+  O_fwrite(hello, O_strlen(hello), 10, stdout);
 
   return (0);
 }
