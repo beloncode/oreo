@@ -12,7 +12,7 @@ O_main
 (u0_t)
 {
   const char_t hello[] = "Hello world\n";
-  O_fwrite(hello, O_strlen(hello), 10, stdout);
+  O_fputs(hello, stdout);
 
   return (0);
 }

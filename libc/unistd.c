@@ -30,5 +30,3 @@ write
 {
   return ((mi64_t)__syscall3(SYS_WRITE, fd, (u64_t)buf, count));
 }
-
-

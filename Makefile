@@ -52,7 +52,10 @@ LIBC_OBJS=\
 	libc/stdout.o\
 	libc/stdio.o\
 	libc/poll.o\
-	libc/strlen.o
+	libc/strlen.o\
+	libc/memcpy.o\
+	libc/memmove.o\
+	libc/memset.o
 
 LIBRARIES=\
 	$(LIBC_LIB)

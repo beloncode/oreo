@@ -40,5 +40,12 @@ typedef signed char i8_t;
 typedef unsigned char u8_t;
 #endif
 
+/* The maximum bytes that alloca can allocate into the stack */
+#define MAX_STACK_ALLOC_SIZE 0x1ff
+
+#ifndef f32_t
+typedef float f32_t;
+#endif
+
 #endif
 

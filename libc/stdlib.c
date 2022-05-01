@@ -18,5 +18,3 @@ O_atexit
   g_user_exit_handler = reg_callback;
   MUTEX_UNLOCK(&lock);
 }
-
-

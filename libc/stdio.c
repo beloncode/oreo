@@ -8,6 +8,8 @@
 
 #include "branch.h"
 
+#include "string.h"
+
 mu64_t 
 O_fwrite
 (const u0_t *ptr, mu64_t size, mu64_t nmemb, O_FILE *stream)
@@ -24,7 +26,7 @@ O_fwrite
   }
   MUTEX_UNLOCK(&stream->file_lock);
 
-  return (writed);  
+  return (writed);
 }
 
 /* Returns the file descriptor associated with the O_FILE IO structure */
@@ -36,3 +38,26 @@ O_fileno
     return (-1);
   return (__STATIC_O_FILENO(stream));
 }
+
+i32_t
+O_fputc
+(i32_t ch, O_FILE *stream)
+{
+  unlikely (stream == NULL)
+    return (-1);
+  if (O_fwrite((char_t*)&ch, sizeof(char), 1, stream) != EOF)
+    return (ch);
+
+  return (-1); 
+}
+
+i32_t
+O_fputs
+(const char_t *str, O_FILE *stream)
+{
+  unlikely (stream == NULL)
+    return (-1);
+  i32_t writed = O_fwrite(str, O_strlen(str), 1, stream); 
+  return (writed);
+}
+

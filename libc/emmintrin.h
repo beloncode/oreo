@@ -1,3 +1,8 @@
+/* This code is part of OREO project, all rights reserved to the owners
+ * Wrote by: [Gabriel Correia]
+ * Create at: 2022/04/29
+*/
+
 #ifndef EMMINTRIN_H
 #define EMMINTRIN_H
 
@@ -46,6 +51,11 @@ _mm_movemask_epi8
   return (__builtin_ia32_pmovmskb128((__v16qi)dest));
 }
 
+extern __inline u0_t __attribute__((__gnu_inline__, __always_inline__, __artificial__))
+_mm_storeu_si128 (__m128i_u *dest, __m128i src)
+{
+  *dest = src;
+}
 
 #endif
 

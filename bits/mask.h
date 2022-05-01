@@ -1,3 +1,8 @@
+/* This code is part of OREO project, all rights reserved to the owners
+ * Wrote by: [Gabriel Correia]
+ * Create at: 2022/04/27
+*/
+
 #ifndef BITS_MASK_H
 #define BITS_MASK_H
 

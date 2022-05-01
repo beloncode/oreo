@@ -46,8 +46,7 @@ O_strlen
   return (str_lenght);
 }
 
-/* The compiler will generate something like this: Very interesting ;) 
-
+/* The compiler will generate something like this: Very interesting ;)
 48 85 ff                test   rdi,rdi
 74 31                   je     1213 <O_strlen+0x36>
 80 3f 00                cmp    BYTE PTR [rdi],0x0
@@ -70,4 +69,3 @@ eb fe                   jmp    1211 <O_strlen+0x34>
 31 c0                   xor    eax,eax
 c3                      ret
 */
-
