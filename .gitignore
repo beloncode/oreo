@@ -3,3 +3,4 @@ peda*
 *.a
 bin/*
 lib/*
+.gdb*
