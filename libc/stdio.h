@@ -24,6 +24,7 @@ extern O_FILE *stdout;
 extern mu64_t O_fwrite(const u0_t *ptr, mu64_t size, mu64_t nmemb, O_FILE *stream);
 
 extern i32_t O_fputs(const char_t *str, O_FILE *stream);
+extern i32_t O_puts(const char_t *str);
 extern i32_t O_fputc(i32_t ch, O_FILE *stream);
 
 #define STDOUT_FILENO 0

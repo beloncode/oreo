@@ -7,6 +7,7 @@
 #define LIBC_STDDEF_H
 
 #include "stdint.h"
+#include "stdbool.h"
 
 #ifndef char_t
 typedef char char_t;

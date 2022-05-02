@@ -58,6 +58,11 @@ O_fputs
   unlikely (stream == NULL)
     return (-1);
   i32_t writed = O_fwrite(str, O_strlen(str), 1, stream); 
+  writed += O_fwrite("\n", 1, 1, stream);
   return (writed);
 }
 
+i32_t O_puts(const char_t *str)
+{
+  return O_fputs(str, stdout); 
+}

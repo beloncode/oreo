@@ -18,18 +18,16 @@ O_memset
       (f32_t)constant,
       (f32_t)constant
     };
-  __m128i const_128 = _mm_loadu_si128((__m128i*)constants);
-  register __m128i *dest_128 = (__m128i*)dest;
+  register __m128i const_128 = _mm_loadu_si128((__m128i*)constants);
+  __m128i *dest_128 = (__m128i*)dest;
   mu64_t copied = 0;
   
-  if (num > sizeof (__m128i)) {
-    for (copied = 0; copied < num; copied += sizeof (__m128i)) {
-      _mm_storeu_si128(dest_128++, const_128);
-    }
-  }
+  for (; num - copied > sizeof (__m128i) && copied < num; copied += sizeof (__m128i))
+    _mm_storeu_si128(dest_128++, const_128);
+  
   u8_t *dest_ = dest + copied;
 
-  while (copied++ != num)
+  while (copied++ < num)
     *dest_++ = constant;
   
   return (dest);

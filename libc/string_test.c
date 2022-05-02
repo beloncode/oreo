@@ -4,6 +4,7 @@
 */
 
 #include "string.h"
+#include "stdio.h"
 #include "test/expect.h"
 
 u0_t
@@ -15,7 +16,20 @@ strrchr_test
   char_t *lastest_char = O_strrchr(some_str, SEARCH_CHAR);
   EXPECT_EQ_CHAR(*lastest_char, SEARCH_CHAR);
   EXPECT_EQ(lastest_char - some_str, 29);
-  //EXPECT_EQ_PTR(O_strrchr(NULL, 0), NULL);
+  O_puts("Test> strrchar is ok");
+
+}
+u0_t
+memset_test
+(u0_t)
+{
+  u8_t some_data[17];
+  O_memset(some_data, 0, sizeof (some_data)); 
+  
+  for (i32_t i_loop = 0; i_loop < sizeof (some_data); i_loop++)
+    EXPECT_EQ(some_data[i_loop], 0);
+
+  O_puts("Test> memset is ok");
 
 }
 
@@ -24,6 +38,7 @@ O_main
 (u0_t)
 {
   strrchr_test();
+  memset_test();
 
   return (0);
 }

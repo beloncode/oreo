@@ -9,10 +9,10 @@
 #include "alloca.h"
 #include "unistd.h"
 
-/* Move a block of memory from a address to other 
+/* Move a block of memory from a address to other location 
  * This function is more slow than the O_memcpy, because his copy the src buffer for
- * a auxiliary buffer and then copy from the auxilirary to the dest location,
- * basically a swap operation.
+ * a auxiliary buffer and then copy from the auxilirary buffer to the dest location,
+ * basically a SWAP operation.
 */
 
 u0_t*
