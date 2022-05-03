@@ -8,6 +8,23 @@
 #include "branch.h"
 
 char_t*
+O_strchr
+(const char_t *dest, i32_t character)
+{
+  char_t *first = NULL;
+
+  while (*dest != '\0' && *dest++ != character) ;
+
+  if (*dest == '\0')
+    /* The character has not been found */
+    first = NULL;
+  else
+    first = (char_t*)dest;
+
+  return (first);
+}
+
+char_t*
 O_strrchr
 (const char_t *dest, i32_t character)
 {

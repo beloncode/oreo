@@ -55,7 +55,8 @@ LIBC_OBJS=\
 	libc/strlen.o\
 	libc/memcpy.o\
 	libc/memmove.o\
-	libc/memset.o
+	libc/memset.o\
+	libc/strcmp.o
 
 LIBRARIES=\
 	$(LIBC_LIB)
@@ -74,7 +75,9 @@ TEST_BINS=\
 OREO_OBJS=\
 	test/expect.o\
 	fatal.o\
-	oreomain.o
+	flag.o\
+	memory.o\
+	oreomain.o\
 
 $(OREO_BIN): $(OREO_OBJS) $(LIBRARIES)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^

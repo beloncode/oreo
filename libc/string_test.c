@@ -24,10 +24,10 @@ memset_test
 (u0_t)
 {
   u8_t some_data[100];
-  O_memset(some_data, 0, sizeof (some_data)); 
+  O_memset(some_data, 0xf1, sizeof (some_data)); 
   
   for (i32_t i_loop = 0; i_loop < sizeof (some_data); i_loop++)
-    EXPECT_EQ(some_data[i_loop], 0);
+    EXPECT_EQ(some_data[i_loop], 0xf1);
 
   O_puts("Test> memset is ok");
 

@@ -6,7 +6,10 @@
 #ifndef EMMINTRIN_H
 #define EMMINTRIN_H
 
+#if __GNUC__
 #pragma GCC target("sse2")
+#endif
+
 typedef double __v2df __attribute__((__vector_size__(16)));
 typedef long long __v2di __attribute__((__vector_size__(16)));
 typedef unsigned long long __v2du __attribute__((__vector_size__(16)));
