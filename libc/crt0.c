@@ -16,11 +16,11 @@ extern u64ptr_t __text__start;
 /* Address of the end */
 extern u64ptr_t __text_end;
 
-extern i32_t O_main(i32_t, char_t**);
+extern i32_t O_main(i32_t argc, char_t **argv);
 
 #define WAIT_FOR_FDS 5000 /* 5 seconds */
 
-u0_t
+static u0_t
 __libc_before_exit
 (u0_t)
 {

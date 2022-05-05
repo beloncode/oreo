@@ -6,7 +6,7 @@
 #ifndef EMMINTRIN_H
 #define EMMINTRIN_H
 
-#if __GNUC__
+#ifndef __clang__
 #pragma GCC target("sse2")
 #endif
 

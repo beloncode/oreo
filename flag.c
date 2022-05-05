@@ -61,21 +61,21 @@ flag_bool
 
 static char_t*
 flag_process_value
-(struct flag_option *option, enum flag_option_info type, char_t *argument_to_format)
+(struct flag_option *option, enum flag_option_info type, char_t *argument)
 {
   static const char_t* const boolean_format[] = {"true", "false"};
 
-  if (argument_to_format) {
+  if (argument) {
     switch (type) {
     case FLAG_TYPE_BOOLEAN:
-      if (O_strcmp(argument_to_format, boolean_format[0]) == 0)
+      if (O_strcmp(argument, boolean_format[0]) == 0)
         *option->arg_pointer.as_bool = true;
-      else if (O_strcmp(argument_to_format, boolean_format[1]) == 0)
+      else if (O_strcmp(argument, boolean_format[1]) == 0)
         *option->arg_pointer.as_bool = false;
     break;
     }
   }
-  return (argument_to_format);
+  return (argument);
 }
 
 enum flag_status
@@ -112,7 +112,7 @@ flag_parser
     }
 
     if (opt_type_state == OPTION_UNDEFINED) {
-      flag->rest_argv = argv-1;
+      flag->rest_argv = argv - 1;
       flag->rest_argc = curr_argc;
       flag->status = FLAG_NA;
       continue;
@@ -130,21 +130,21 @@ flag_parser
     }
 
     for (; o_count_loop < FLAG_OPTS_COUNT; o_count_loop++) {
-      struct flag_option **curr_option = flag->flag_options + o_count_loop;
+      struct flag_option *curr_option = *(flag->flag_options + o_count_loop);
       enum flag_option_info type = *flag->flag_infos + o_count_loop;
       
-      if (*curr_option == NULL) {
+      if (curr_option == NULL) {
         flag->arg_not_found = curr_argv;
         return (flag->status = FLAG_ARGNF);
       }
 
       if (opt_type_state == OPTION_SHORT)
-        if (O_strncmp((*curr_option)->short_option, curr_argv, 1) != 0) continue;
+        if (O_strncmp(curr_option->short_option, curr_argv, 1) != 0) continue;
       if (opt_type_state == OPTION_LONG)
-        if (O_strncmp((*curr_option)->long_option, curr_argv, arg_value_pos) != 0) continue;
+        if (O_strncmp(curr_option->long_option, curr_argv, arg_value_pos) != 0) continue;
       
-      arg_value = flag_process_value(*curr_option, type, arg_value);
-      (*curr_option)->exec_func_handler(curr_argc, &curr_argv, flag->rest_argv);
+      arg_value = flag_process_value(curr_option, type, arg_value);
+      curr_option->exec_func_handler(curr_argc, &curr_argv, flag->rest_argv);
       break;
     }
   }

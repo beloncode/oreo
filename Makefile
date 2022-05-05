@@ -16,7 +16,7 @@ FILL_ARGV?=
 
 INCLUDE_DIR=$(shell pwd)
 
-CFLAGS=-Os -ggdb -nostdlib -Wall -Werror -I$(INCLUDE_DIR)
+CFLAGS=-Os -ggdb -nostdlib -Wall -Werror -I$(INCLUDE_DIR) -fPIC
 
 BIN=bin
 
