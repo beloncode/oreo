@@ -8,7 +8,7 @@
 
 #include "flag.h"
 
-static const char_t* flag_status_str[] = {
+static const char_t* const flag_status_str[] = {
   "It's fine, go ahead and try new options",
   "The last argument isn't a option",
   "Argument not found (Critial problem)",
@@ -63,7 +63,7 @@ static char_t*
 flag_process_value
 (struct flag_option *option, enum flag_option_info type, char_t *argument_to_format)
 {
-  static const char_t *boolean_format[] = {"true", "false"};
+  static const char_t* const boolean_format[] = {"true", "false"};
 
   if (argument_to_format) {
     switch (type) {
@@ -75,7 +75,7 @@ flag_process_value
     break;
     }
   }
-  return argument_to_format;
+  return (argument_to_format);
 }
 
 enum flag_status
@@ -102,9 +102,6 @@ flag_parser
     curr_argv = *argv++;
     opt_type_state = OPTION_UNDEFINED;
 
-    flag->rest_argv = &curr_argv;
-    flag->rest_argc = curr_argc;
-
     if (*curr_argv == '-') {
       opt_type_state = OPTION_SHORT;
       curr_argv++;
@@ -115,10 +112,12 @@ flag_parser
     }
 
     if (opt_type_state == OPTION_UNDEFINED) {
+      flag->rest_argv = argv-1;
+      flag->rest_argc = curr_argc;
       flag->status = FLAG_NA;
       continue;
     }
-    
+
     flag->consumed_arg = curr_argv;
 
     char_t *arg_value = *argv;
@@ -153,10 +152,36 @@ flag_parser
   return (flag->status = FLAG_ITS_FINE);
 }
 
+char_t* 
+flag_arg_not_found
+(const flag_parser_t *flag)
+{
+  unlikely (flag == NULL)
+    return NULL;
+  return (flag->arg_not_found);
+}
+
+char_t*
+flag_exec_path
+(const flag_parser_t *flag)
+{
+  unlikely (flag == NULL)
+    return NULL;
+  return (flag->program_exec_path);
+}
+
+char_t**
+flag_non_args
+(const flag_parser_t *flag)
+{
+  unlikely (flag == NULL)
+    return NULL;
+  return (flag->rest_argv);
+}
+
 const char_t*
 flag_status_to_str(enum flag_status status)
 {
-  return flag_status_str[status];
+  return (flag_status_str[status]);
 }
-
 

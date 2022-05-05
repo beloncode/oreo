@@ -15,10 +15,8 @@ O_strchr
 
   while (*dest != '\0' && *dest++ != character) ;
 
-  if (*dest == '\0')
-    /* The character has not been found */
-    first = NULL;
-  else
+  if (*dest != '\0')
+    /* The character has been found */
     first = (char_t*)dest;
 
   return (first);

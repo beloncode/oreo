@@ -70,6 +70,10 @@ u0_t flag_bool(struct flag_option *option, flag_parser_t *flag);
 
 enum flag_status flag_parser(i32_t argc, char_t *argv[], flag_parser_t *flag);
 
+char_t* flag_arg_not_found(const flag_parser_t *flag);
+char_t* flag_exec_path(const flag_parser_t *flag);
+char_t** flag_non_args(const flag_parser_t *flag);
+
 const char_t* flag_status_to_str(enum flag_status status);
 
 #endif
