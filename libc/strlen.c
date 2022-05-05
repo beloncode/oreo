@@ -8,7 +8,7 @@
 #include "branch.h"
 #include "emmintrin.h"
 
-extern mu64_t
+mu64_t
 O_strlen
 (const char_t *dest)
 {

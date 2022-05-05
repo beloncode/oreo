@@ -3,13 +3,14 @@
  * Create at: 2022/04/28
 */
 
+#include "stdio.h"
 #include "unistd.h"
 
 u0_t __attribute__((noreturn))
 __stack_chk_fail
 (u0_t)
 {
-  exit(10);
+  exit(O_puts("Error: stack smashing detected"));
 }
 
 

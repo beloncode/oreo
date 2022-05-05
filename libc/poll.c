@@ -8,7 +8,7 @@
 #include "arch/systable.h"
 #include "arch/asm.h"
 
-extern i32_t
+i32_t
 O_poll
 (struct O_pollfd *fds, nfds_t nfds, i32_t timeout)
 {

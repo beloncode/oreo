@@ -8,7 +8,9 @@ LDFLAGS=-T$(LD_SCRIPT)
 
 AR?=ar
 
-DBG=gdb
+STRACE?=strace
+
+DBG?=gdb
 
 READELF=readelf
 
@@ -16,7 +18,16 @@ FILL_ARGV?=
 
 INCLUDE_DIR=$(shell pwd)
 
-CFLAGS=-Os -ggdb -nostdlib -Wall -Werror -I$(INCLUDE_DIR) -fPIC
+CFLAGS=-Os\
+	-ggdb\
+	-nostdlib\
+	-Wall\
+	-Wno-implicit-function-declaration\
+	-Wno-builtin-declaration-mismatch\
+	-Wno-unknown-warning-option\
+	-Werror\
+	-I$(INCLUDE_DIR)\
+	-fPIC
 
 BIN=bin
 
@@ -92,6 +103,10 @@ test: $(TEST_BINS)
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
 
+party:
+	$(CC) ./party/puts_sys_test.c -o ./party/puts_sys_test &&\
+		$(STRACE) ./party/puts_sys_test 2> ./party/puts_sys_test_strace
+
 clean:
 	rm -f $(LIBC_OBJS)
 	rm -f $(OREO_OBJS)
@@ -100,6 +115,7 @@ clean:
 	rm -f $(TEST_BINS)
 	rm -f $(TEST_STRING_OBJS)
 	rm -f $(LIBRARIES)
+	rm -f ./party/puts_sys_test ./party/puts_sys_test_strace
 
-.PHONY: all clean dbg info run test
+.PHONY: all clean dbg info party run test
 

@@ -7,6 +7,21 @@
 
 #include "emmintrin.h"
 
+#undef memset
+
+/* Avoid compiler warnings */
+
+/* The symbol 'memset' must be exported */
+/* inline __attribute__((always_inline)) */ u0_t*
+memset
+(u0_t *dest, i32_t c, mu64_t n)
+{
+  uchar_t *dest_ = (uchar_t*)dest;
+  while (n-- > 0)
+    *dest_++ = (u8_t)c;
+  return dest;
+}
+
 u0_t*
 O_memset
 (u0_t *dest, i32_t constant, mu64_t num)
@@ -27,10 +42,8 @@ O_memset
     _mm_storeu_si128(dest_128++, const_128);
   
   u8_t *dest_ = dest + copied;
+  memset(dest_, constant, num - copied);
 
-  while (copied++ < num)
-    *dest_++ = constant;
-  
   return (dest);
 }
 

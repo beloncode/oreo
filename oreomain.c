@@ -29,7 +29,7 @@ O_main
 
   static struct flag_option options[FLAG_OPTS_COUNT] = {
 #define HELP_ARG_INDEX 0
-    {{&help_flag}, display_help, "help", "h", {false}, "Display the usage table for the user"},
+    {{&help_flag}, display_help, "help", "h", {true}, "Display the usage table for the user"},
     {}
   };
 

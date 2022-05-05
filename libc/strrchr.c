@@ -13,7 +13,7 @@ O_strchr
 {
   char_t *first = NULL;
 
-  while (*dest != '\0' && *dest++ != character) ;
+  while (*dest != '\0' && *dest != character) dest++;
 
   if (*dest != '\0')
     /* The character has been found */

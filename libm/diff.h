@@ -12,7 +12,7 @@ __inline mu64_t
 O_min
 (mu64_t x, mu64_t y)
 {
-  return x > y ? y : x;
+  return (x > y ? y : x);
 }
 
 #endif

@@ -41,7 +41,8 @@ enum flag_status
 {
   FLAG_ITS_FINE = 0,
   FLAG_NA,
-  FLAG_ARGNF
+  FLAG_ARGNF,
+  FLAG_ARGNP
 };
 
 typedef struct flag_parser

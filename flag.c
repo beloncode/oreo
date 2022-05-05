@@ -11,7 +11,8 @@
 static const char_t* const flag_status_str[] = {
   "It's fine, go ahead and try new options",
   "The last argument isn't a option",
-  "Argument not found (Critial problem)",
+  "Argument not found",
+  "Argument value not passed",
   NULL
 };
 
@@ -67,12 +68,14 @@ flag_process_value
 
   if (argument) {
     switch (type) {
+
     case FLAG_TYPE_BOOLEAN:
       if (O_strcmp(argument, boolean_format[0]) == 0)
         *option->arg_pointer.as_bool = true;
       else if (O_strcmp(argument, boolean_format[1]) == 0)
         *option->arg_pointer.as_bool = false;
     break;
+    
     }
   }
   return (argument);
@@ -82,7 +85,7 @@ enum flag_status
 flag_parser
 (i32_t argc, char_t *argv[], flag_parser_t *flag)
 {
-  u8_t o_count_loop = 0;
+  u8_t array_index = 0;
   enum option_type {
     OPTION_UNDEFINED = 0,
     OPTION_SHORT,
@@ -101,6 +104,7 @@ flag_parser
     curr_argc = argc--;
     curr_argv = *argv++;
     opt_type_state = OPTION_UNDEFINED;
+    array_index = 0;
 
     if (*curr_argv == '-') {
       opt_type_state = OPTION_SHORT;
@@ -129,9 +133,9 @@ flag_parser
       arg_value_pos = arg_value - curr_argv;
     }
 
-    for (; o_count_loop < FLAG_OPTS_COUNT; o_count_loop++) {
-      struct flag_option *curr_option = *(flag->flag_options + o_count_loop);
-      enum flag_option_info type = *flag->flag_infos + o_count_loop;
+    for (; array_index < FLAG_OPTS_COUNT; array_index++) {
+      struct flag_option *curr_option = *(flag->flag_options + array_index);
+      enum flag_option_info type = *flag->flag_infos + array_index;
       
       if (curr_option == NULL) {
         flag->arg_not_found = curr_argv;
@@ -143,12 +147,15 @@ flag_parser
       if (opt_type_state == OPTION_LONG)
         if (O_strncmp(curr_option->long_option, curr_argv, arg_value_pos) != 0) continue;
       
-      arg_value = flag_process_value(curr_option, type, arg_value);
+      if (arg_value && O_strlen(arg_value) > 1)
+        arg_value = flag_process_value(curr_option, type, arg_value);
+      else
+        if (opt_type_state == OPTION_WITH_VALUE)
+          return (flag->status = FLAG_ARGNP);
       curr_option->exec_func_handler(curr_argc, &curr_argv, flag->rest_argv);
       break;
     }
   }
-
   return (flag->status = FLAG_ITS_FINE);
 }
 

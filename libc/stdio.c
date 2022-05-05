@@ -62,7 +62,9 @@ O_fputs
   return (writed);
 }
 
-i32_t O_puts(const char_t *str)
+i32_t
+O_puts
+(const char_t *str)
 {
-  return O_fputs(str, stdout); 
+  return (O_fputs(str, stdout)); 
 }
