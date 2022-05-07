@@ -13,8 +13,8 @@ __syscall1
 (u64_t num, u64_t rdi)
 {
   u64_t ret;
-  __asm__ __volatile__(
-    "syscall" : "=a"(ret) : "a"(num), "D"(rdi) : "rcx", "r11", "memory"
+  __asm__ __volatile__("syscall" : "=a"(ret) : "a"(num), "D"(rdi)
+    : "rcx", "r11", "memory"
   );
   return (ret);
 }
@@ -24,11 +24,10 @@ __syscall3
 (u64_t num, u64_t rdi, u64_t rsi, u64_t rdx)
 {
   u64_t ret;
-  __asm__ __volatile__("syscall" : "=a"(ret) : "a"(num), "D"(rdi), "S"(rsi),
-    "d"(rdx) : "rcx", "r11", "memory");
+  __asm__ __volatile__("syscall" : "=a"(ret) : "a"(num), "D"(rdi), "S"(rsi), "d"(rdx)
+    : "rcx", "r11", "memory");
   return (ret);
 }
 
 #endif
-
 

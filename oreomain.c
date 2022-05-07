@@ -7,6 +7,8 @@
 #include "libc/stdio.h"
 #include "libc/string.h"
 
+#include "libc/unistd.h"
+
 #include "flag.h"
 
 static bool_t help_flag;
@@ -36,7 +38,7 @@ O_main
   flag_reset(&flag);
   flag_bool(&options[HELP_ARG_INDEX], &flag);
   bool_t parser_status = flag_parser(argc, argv, &flag);
-
+  
   O_puts(flag_status_to_str(parser_status));
   
   return (0);

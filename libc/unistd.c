@@ -7,7 +7,6 @@
 
 #include "crt.h"
 
-#include "arch/systable.h"
 #include "arch/asm.h"
 
 #include "stdlib.h"
@@ -30,3 +29,23 @@ write
 {
   return ((mi64_t)__syscall3(SYS_WRITE, fd, (u64_t)buf, count));
 }
+
+#define DO_BRK(value) __syscall1(SYS_BRK, (u64_t)value)
+
+i32_t
+brk
+(u0_t *addr)
+{
+  return !(DO_BRK(addr));
+}
+
+/* Inclement the program data segment */
+u0_t*
+sbrk
+(mu64_t increment)
+{
+  u64_t actual_point = DO_BRK(0);
+  actual_point += increment;
+  return ((u0_t*)DO_BRK(actual_point));
+}
+

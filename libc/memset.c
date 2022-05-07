@@ -19,7 +19,7 @@ memset
   uchar_t *dest_ = (uchar_t*)dest;
   while (n-- > 0)
     *dest_++ = (u8_t)c;
-  return dest;
+  return (dest);
 }
 
 u0_t*

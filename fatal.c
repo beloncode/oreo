@@ -5,13 +5,14 @@
 
 #include "fatal.h"
 
+#include "libc/stdio.h"
 #include "libc/unistd.h"
 
 u0_t
 fatal_error
 (const char_t *fmt, ...)
 {
-  exit(1);
+  exit(O_puts("A fatal error has ocurred"));
 
 }
 

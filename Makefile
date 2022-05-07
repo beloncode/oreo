@@ -33,7 +33,9 @@ BIN=bin
 
 LIB=lib
 
-OREO_VER=0.0.1
+GIT_VER=$(shell git rev-parse --short HEAD)
+
+OREO_VER=0.0.2_$(GIT_VER)
 
 ARCH=$(shell uname -m)
 
@@ -51,6 +53,10 @@ dbg: $(OREO_BIN)
 	$(DBG) --args ./$< $(FILL_ARGV)
 
 LIBC_LIB=$(LIB)/libc_$(OREO_VER)_$(ARCH).a
+HEAP_LIB=$(LIB)/heap_$(OREO_VER)_$(ARCH).a
+
+HEAP_OBJS=\
+	heap/malloc_int.o
 
 LIBC_OBJS=\
 	libc/crt0.o\
@@ -70,7 +76,11 @@ LIBC_OBJS=\
 	libc/strcmp.o
 
 LIBRARIES=\
-	$(LIBC_LIB)
+	$(LIBC_LIB)\
+	$(HEAP_LIB)
+
+$(HEAP_LIB): $(HEAP_OBJS)
+	$(AR) rcs $@ $^
 
 $(LIBC_LIB): $(LIBC_OBJS)
 	$(AR) rcs $@ $^
@@ -88,7 +98,7 @@ OREO_OBJS=\
 	fatal.o\
 	flag.o\
 	memory.o\
-	oreomain.o\
+	oreomain.o
 
 $(OREO_BIN): $(OREO_OBJS) $(LIBRARIES)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
@@ -108,14 +118,15 @@ party:
 		$(STRACE) ./party/puts_sys_test 2> ./party/puts_sys_test_strace
 
 clean:
-	rm -f $(LIBC_OBJS)
-	rm -f $(OREO_OBJS)
-	rm -f $(TEST_EXTRA_OBJS)
-	rm -f $(OREO_BIN)
-	rm -f $(TEST_BINS)
-	rm -f $(TEST_STRING_OBJS)
-	rm -f $(LIBRARIES)
-	rm -f ./party/puts_sys_test ./party/puts_sys_test_strace
+	@rm -f -v $(LIBC_OBJS)\
+		$(HEAP_OBJS)\
+		$(OREO_OBJS)\
+		$(TEST_EXTRA_OBJS)\
+		$(OREO_BIN)\
+		$(TEST_BINS)\
+		$(TEST_STRING_OBJS)\
+		$(LIBRARIES)\
+		./party/puts_sys_test ./party/puts_sys_test_strace
 
 .PHONY: all clean dbg info party run test
 

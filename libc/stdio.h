@@ -7,6 +7,7 @@
 #define LIBC_STDIO_H
 
 #include "stddef.h"
+#include "malloc.h"
 #include "mutex.h"
 
 typedef struct _IO_O_FILE {

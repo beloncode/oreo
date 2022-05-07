@@ -47,23 +47,22 @@ enum flag_status
 
 typedef struct flag_parser
 {
-  struct flag_option      *flag_options[FLAG_OPTS_COUNT];
-  enum flag_option_info   flag_infos[FLAG_OPTS_COUNT];
+  struct flag_option *flag_options[FLAG_OPTS_COUNT];
+  enum flag_option_info flag_infos[FLAG_OPTS_COUNT];
 
-  enum flag_status  status;
+  enum flag_status status;
 
-  u8_t              flag_index;
+  u8_t flag_index;
 
-  char_t            **rest_argv;
-  i32_t             rest_argc;
+  char_t **rest_argv;
+  i32_t rest_argc;
 
-  char_t            *program_exec_path;
-  char_t            *consumed_arg;
+  char_t *program_exec_path;
+  char_t *consumed_arg;
 
-  char_t            *arg_not_found;
+  char_t *arg_not_found;
 
 } flag_parser_t;
-
 
 u0_t flag_reset(flag_parser_t *flag);
 

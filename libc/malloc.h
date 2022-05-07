@@ -1,13 +1,12 @@
 /* This code is part of OREO project, all rights reserved to the owners
  * Wrote by: [Gabriel Correia]
- * Create at: 2022/04/28
+ * Create at: 2022/05/06
 */
 
-#ifndef ARCH_ASM_H
-#define ARCH_ASM_H
+#ifndef LIBC_MALLOC_H
+#define LIBC_MALLOC_H
 
-#include "systable.h"
-#include "asm_syscall.h"
+#include "heap/malloc_int.h"
 
 #endif
 
