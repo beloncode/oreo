@@ -41,7 +41,7 @@ O_strlen
         str_lenght++;
       break;
     }
-    str_lenght += sizeof(__m128i);
+    str_lenght += sizeof (__m128i);
 
   }
   

@@ -86,12 +86,16 @@ $(LIBC_LIB): $(LIBC_OBJS)
 	$(AR) rcs $@ $^
 
 TEST_STRING_OBJS=libc/string_test.o
+TEST_MALLOC_OBJS=heap/malloc_test.o
+
 TEST_EXTRA_OBJS=test/expect.o fatal.o
 
 TEST_STRING=libc/string_test_$(OREO_VER)_$(ARCH)
+TEST_MALLOC=heap/malloc_test_$(OREO_VER)_$(ARCH)
 
 TEST_BINS=\
-	$(TEST_STRING)
+	$(TEST_STRING)\
+    $(TEST_MALLOC)
 
 OREO_OBJS=\
 	test/expect.o\
@@ -107,8 +111,12 @@ $(OREO_BIN): $(OREO_OBJS) $(LIBRARIES)
 $(TEST_STRING): $(TEST_STRING_OBJS) $(TEST_EXTRA_OBJS) $(LIBC_LIB)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
+
+$(TEST_MALLOC): $(TEST_MALLOC_OBJS) $(TEST_EXTRA_OBJS) $(LIBC_LIB) $(HEAP_LIB)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
+
 test: $(TEST_BINS)
-	./$(TEST_STRING)
+	./$(TEST_STRING) && ./$(TEST_MALLOC)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
@@ -125,6 +133,7 @@ clean:
 		$(OREO_BIN)\
 		$(TEST_BINS)\
 		$(TEST_STRING_OBJS)\
+		$(TEST_MALLOC_OBJS)\
 		$(LIBRARIES)\
 		./party/puts_sys_test ./party/puts_sys_test_strace
 

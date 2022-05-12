@@ -41,11 +41,12 @@ brk
 
 /* Inclement the program data segment */
 u0_t*
-sbrk
+O_sbrk
 (mu64_t increment)
 {
-  u64_t actual_point = DO_BRK(0);
-  actual_point += increment;
-  return ((u0_t*)DO_BRK(actual_point));
+  u64_t brk_addr = DO_BRK(0);
+  u64_t new_brk = brk_addr + increment;
+  DO_BRK(new_brk);
+  return ((u0_t*)brk_addr);
 }
 
