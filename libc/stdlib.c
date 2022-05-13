@@ -6,7 +6,11 @@
 #include "mutex.h"
 #include "unistd.h"
 
+#if __clang__
+u0_t (*g_user_exit_handler)(u0_t) = NULL;
+#else
 volatile u0_t (*g_user_exit_handler)(u0_t) = NULL;
+#endif
 
 static mutex_t lock = MUTEX_INIT;
 

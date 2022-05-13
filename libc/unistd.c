@@ -39,7 +39,7 @@ brk
   return !(DO_BRK(addr));
 }
 
-/* Inclement the program data segment */
+/* Increment the program data segment */
 u0_t*
 O_sbrk
 (mu64_t increment)

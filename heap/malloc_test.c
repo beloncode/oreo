@@ -1,3 +1,8 @@
+/* This code is part of OREO project, all rights reserved to the owners
+ * Wrote by: [Gabriel Correia]
+ * Create at: 2022/06/13
+*/
+
 #include "malloc_int.h"
 
 i32_t
@@ -11,7 +16,11 @@ O_main
   if (*data == 'A')
     O_puts("Re-using the freed memory of the same size");
   else
-    O_puts("Wait, there's somes problems in free-list");
+    exit(O_puts("Wait, there's somes problems in free-list"));
+  O_free(data);
+
+  /* Reusing the same memory block */
+  data = O_malloc(11);
   O_free(data);
 
   return (0);

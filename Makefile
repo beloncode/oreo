@@ -95,7 +95,7 @@ TEST_MALLOC=heap/malloc_test_$(OREO_VER)_$(ARCH)
 
 TEST_BINS=\
 	$(TEST_STRING)\
-    $(TEST_MALLOC)
+	$(TEST_MALLOC)
 
 OREO_OBJS=\
 	test/expect.o\

@@ -38,6 +38,8 @@ struct block_header
   mu64_t blk_size;
   bool_t blk_inuse;
   struct block_header *prev, *next;
+
+  /* Pointer received by the user as the malloc result */
   u0_t *blk_ptr;
 };
 
@@ -62,7 +64,7 @@ struct malloc_int_header
 #define foreach_free_list(node, head)\
   for (node = head; node != NULL; node = node->next)
 
-static inline u0_t
+static __inline u0_t
 malloc_free_list_push
 (struct block_header *block)
 {
@@ -71,7 +73,7 @@ malloc_free_list_push
   *head_ptr = (struct free_list*)block;
 }
 
-static inline struct block_header*
+static struct block_header*
 malloc_heap_grow
 (mu64_t size)
 {
@@ -83,7 +85,7 @@ malloc_heap_grow
   user_block = O_sbrk(size);
   
   mu64_t *size_ptr = &malloc_int.heap_size;
- *size_ptr += size;
+  *size_ptr += size;
   
   struct block_header **head_ptr = &malloc_int.head;
   struct block_header **tail_ptr = &malloc_int.tail;
@@ -100,12 +102,13 @@ malloc_heap_grow
   return (user_block);
 }
 
-static inline struct block_header*
+static struct block_header*
 malloc_request_memory
 (mu64_t size)
 {
   struct block_header *user_block = NULL;
-  struct free_list *free, *last = NULL, **list_ptr = &malloc_int.free_block_list;
+  struct free_list *free, *last = NULL,
+    **list_ptr = &malloc_int.free_block_list;
 
   foreach_free_list (free, *list_ptr) {
     struct block_header *block = (struct block_header*)free;
