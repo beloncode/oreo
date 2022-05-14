@@ -1,6 +1,6 @@
-/* This code is part of OREO project, all rights reserved to the owners
- * Wrote by: [Gabriel Correia]
- * Create at: 2022/04/28
+/* This code is part of oreo project, all rights reserved (See LICENSE)
+ * Wrote by: "Gabriel Correia"
+ * Created at: 2022/04/28
 */
 
 #include "string.h"
@@ -12,19 +12,15 @@
 /* Avoid compiler warnings */
 
 /* The symbol 'memset' must be exported */
-/* inline __attribute__((always_inline)) */ u0_t*
-memset
-(u0_t *dest, i32_t c, mu64_t n)
+/* inline __attribute__((always_inline)) */ u0_t* memset(u0_t *dest, i32_t c, mu64_t n)
 {
   uchar_t *dest_ = (uchar_t*)dest;
   while (n-- > 0)
     *dest_++ = (u8_t)c;
-  return (dest);
+  return dest;
 }
 
-u0_t*
-O_memset
-(u0_t *dest, i32_t constant, mu64_t num)
+u0_t* O_memset(u0_t *dest, i32_t constant, mu64_t num)
 {
   i8_t block_data[] = {(i8_t)constant, (i8_t)constant, (i8_t)constant, (i8_t)constant};
   /* Hack trick: Fill a 16 bytes vector range with 4 constant values :0 */
@@ -44,7 +40,6 @@ O_memset
   u8_t *dest_ = dest + copied;
   memset(dest_, constant, num - copied);
 
-  return (dest);
+  return dest;
 }
-
 

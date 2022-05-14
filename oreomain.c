@@ -1,6 +1,6 @@
-/* This code is part of OREO project, all rights reserved to the owners
- * Wrote by: [Gabriel Correia]
- * Create at: 2022/04/27
+/* This code is part of oreo project, all rights reserved (See LICENSE)
+ * Wrote by: "Gabriel Correia"
+ * Created at: 2022/04/27
 */
 
 #include "libc/stddef.h"
@@ -13,9 +13,7 @@
 
 static bool_t help_flag;
 
-static u0_t
-display_help
-(i32_t actual_argc, char_t **actual_argv, char_t **non_option)
+static u0_t display_help(i32_t actual_argc, char_t **actual_argv, char_t **non_option)
 {
   if (help_flag)
     O_puts("Help value is true");
@@ -23,9 +21,7 @@ display_help
     O_puts("Help value is false");
 }
 
-i32_t
-O_main
-(i32_t argc, char_t *argv[])
+i32_t O_main(i32_t argc, char_t *argv[])
 {
   flag_parser_t flag;
 
@@ -41,6 +37,6 @@ O_main
   
   O_puts(flag_status_to_str(parser_status));
   
-  return (0);
+  return 0;
 }
 

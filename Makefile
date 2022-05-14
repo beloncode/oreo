@@ -56,7 +56,8 @@ LIBC_LIB=$(LIB)/libc_$(OREO_VER)_$(ARCH).a
 HEAP_LIB=$(LIB)/heap_$(OREO_VER)_$(ARCH).a
 
 HEAP_OBJS=\
-	heap/malloc_int.o
+	heap/malloc_int.o\
+	heap/heap.o
 
 LIBC_OBJS=\
 	libc/crt0.o\

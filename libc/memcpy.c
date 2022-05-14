@@ -1,6 +1,6 @@
-/* This code is part of OREO project, all rights reserved to the owners
- * Wrote by: [Gabriel Correia]
- * Create at: 2022/04/28
+/* This code is part of oreo project, all rights reserved (See LICENSE)
+ * Wrote by: "Gabriel Correia"
+ * Created at: 2022/04/28
 */
 
 #include "string.h"
@@ -8,9 +8,7 @@
 
 #include "xmmintrin.h"
 
-u0_t*
-O_memcpy
-(u0_t *dest, u0_t *src, mu64_t num)
+u0_t* O_memcpy(u0_t *dest, u0_t *src, mu64_t num)
 {
   __m128i *src_128 = (__m128i*)src;
   __m128i *dest_128 = (__m128i*)dest;
@@ -25,5 +23,5 @@ O_memcpy
   while (copied++ != num)
     *dest_++ = *src_++;
   
-  return (dest);
+  return dest;
 }

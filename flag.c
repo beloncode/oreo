@@ -1,6 +1,6 @@
-/* This code is part of OREO project, all rights reserved to the owners
- * Wrote by: [Gabriel Correia]
- * Create at: 2022/05/03
+/* This code is part of oreo project, all rights reserved (See LICENSE)
+ * Wrote by: "Gabriel Correia"
+ * Created at: 2022/05/03
 */
 
 #include "libc/branch.h"
@@ -16,9 +16,7 @@ static const char_t* const flag_status_str[] = {
   NULL
 };
 
-u0_t 
-flag_reset
-(flag_parser_t *flag)
+u0_t flag_reset(flag_parser_t *flag)
 {
   unlikely (flag == NULL)
     return;
@@ -32,18 +30,13 @@ flag_reset
     flag->flag_options[c_loop] = 0;
 }
 
-static 
-u0_t
-flag_inc_index
-(flag_parser_t *flag)
+static u0_t flag_inc_index(flag_parser_t *flag)
 {
   if (++flag->flag_index == FLAG_OPTS_COUNT)
     flag->flag_index = 0;
 }
 
-u0_t
-flag_bool
-(struct flag_option *option, flag_parser_t *flag)
+u0_t flag_bool(struct flag_option *option, flag_parser_t *flag)
 {
   unlikely (flag == NULL)
     return;
@@ -60,9 +53,7 @@ flag_bool
   flag_inc_index(flag);
 }
 
-static char_t*
-flag_process_value
-(struct flag_option *option, enum flag_option_info type, char_t *argument)
+static char_t* flag_process_value(struct flag_option *option, enum flag_option_info type, char_t *argument)
 {
   static const char_t* const boolean_format[] = {"true", "false"};
 
@@ -78,12 +69,10 @@ flag_process_value
     
     }
   }
-  return (argument);
+  return argument;
 }
 
-enum flag_status
-flag_parser
-(i32_t argc, char_t *argv[], flag_parser_t *flag)
+enum flag_status flag_parser(i32_t argc, char_t *argv[], flag_parser_t *flag)
 {
   u8_t array_index = 0;
   enum option_type {
@@ -139,7 +128,7 @@ flag_parser
       
       if (curr_option == NULL) {
         flag->arg_not_found = curr_argv;
-        return (flag->status = FLAG_ARGNF);
+        return flag->status = FLAG_ARGNF;
       }
 
       if (opt_type_state == OPTION_SHORT)
@@ -151,44 +140,37 @@ flag_parser
         arg_value = flag_process_value(curr_option, type, arg_value);
       else
         if (opt_type_state == OPTION_WITH_VALUE)
-          return (flag->status = FLAG_ARGNP);
+          return flag->status = FLAG_ARGNP;
       curr_option->exec_func_handler(curr_argc, &curr_argv, flag->rest_argv);
       break;
     }
   }
-  return (flag->status = FLAG_ITS_FINE);
+  return flag->status = FLAG_ITS_FINE;
 }
 
-char_t* 
-flag_arg_not_found
-(const flag_parser_t *flag)
+char_t* flag_arg_not_found(const flag_parser_t *flag)
 {
   unlikely (flag == NULL)
     return NULL;
-  return (flag->arg_not_found);
+  return flag->arg_not_found;
 }
 
-char_t*
-flag_exec_path
-(const flag_parser_t *flag)
+char_t* flag_exec_path(const flag_parser_t *flag)
 {
   unlikely (flag == NULL)
     return NULL;
-  return (flag->program_exec_path);
+  return flag->program_exec_path;
 }
 
-char_t**
-flag_non_args
-(const flag_parser_t *flag)
+char_t** flag_non_args(const flag_parser_t *flag)
 {
   unlikely (flag == NULL)
     return NULL;
-  return (flag->rest_argv);
+  return flag->rest_argv;
 }
 
-const char_t*
-flag_status_to_str(enum flag_status status)
+const char_t* flag_status_to_str(enum flag_status status)
 {
-  return (flag_status_str[status]);
+  return flag_status_str[status];
 }
 

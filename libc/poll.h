@@ -1,6 +1,6 @@
-/* This code is part of OREO project, all rights reserved to the owners
- * Wrote by: [Gabriel Correia]
- * Create at: 2022/04/29
+/* This code is part of oreo project, all rights reserved (See LICENSE)
+ * Wrote by: "Gabriel Correia"
+ * Created at: 2022/04/29
 */
 
 #ifndef LIBC_POLL_H
@@ -17,7 +17,8 @@
 #define POLLRDNORM 0x040
 #define POLLRDBAND 0x080
 
-struct O_pollfd {
+struct O_pollfd
+{
   /* File descriptor for monitor */
   i32_t fd;
   /* Requested events */ 
@@ -29,6 +30,5 @@ struct O_pollfd {
 typedef mu64_t nfds_t;
 
 extern i32_t O_poll(struct O_pollfd *fds, nfds_t nfds, i32_t timeout);
-
 
 #endif

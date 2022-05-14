@@ -1,6 +1,6 @@
-/* This code is part of OREO project, all rights reserved to the owners
- * Wrote by: [Gabriel Correia]
- * Create at: 2022/04/28
+/* This code is part of oreo project, all rights reserved (See LICENSE)
+ * Wrote by: "Gabriel Correia"
+ * Created at: 2022/04/28
 */
 
 #ifndef LIBC_STDIO_H
@@ -10,7 +10,8 @@
 #include "malloc.h"
 #include "mutex.h"
 
-typedef struct _IO_O_FILE {
+typedef struct _IO_O_FILE
+{
   const char_t *filename;
   /* Secure lock test-and-set for protect from race condition */
   mutex_t file_lock;

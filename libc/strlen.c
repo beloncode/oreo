@@ -1,6 +1,6 @@
-/* This code is part of OREO project, all rights reserved to the owners
- * Wrote by: [Gabriel Correia]
- * Create at: 2022/04/29
+/* This code is part of oreo project, all rights reserved (See LICENSE)
+ * Wrote by: "Gabriel Correia"
+ * Created at: 2022/04/29
 */
 
 #include "string.h"
@@ -8,14 +8,12 @@
 #include "branch.h"
 #include "emmintrin.h"
 
-mu64_t
-O_strlen
-(const char_t *dest)
+mu64_t O_strlen(const char_t *dest)
 {
   mu64_t str_lenght = 0;
 
   unlikely (dest == NULL || *dest == '\0')
-    return (str_lenght);
+    return str_lenght;
 
   /* The compiler will optimize this, ever try to read some data from this pointer
    * will result into a read of 16 bytes from memory, in a only and comprex mov instruction.
@@ -45,7 +43,7 @@ O_strlen
 
   }
   
-  return (str_lenght);
+  return str_lenght;
 }
 
 /* The compiler will generate something like this: Very interesting ;)

@@ -1,15 +1,14 @@
-/* This code is part of OREO project, all rights reserved to the owners
- * Wrote by: [Gabriel Correia]
- * Create at: 2022/04/27
+/* This code is part of oreo project, all rights reserved (See LICENSE)
+ * Wrote by: "Gabriel Correia"
+ * Created at: 2022/04/27
 */
 
 #include "string.h"
 #include "stdio.h"
+
 #include "test/expect.h"
 
-u0_t
-strrchr_test
-(u0_t)
+u0_t strrchr_test(u0_t)
 {
 #define SEARCH_CHAR 'i'
   char_t some_str[] = "Gabriel Correia is writing this code";
@@ -19,9 +18,7 @@ strrchr_test
   O_puts("Test> strrchar is ok");
 
 }
-u0_t
-memset_test
-(u0_t)
+u0_t memset_test(u0_t)
 {
   u8_t some_data[100];
   O_memset(some_data, 0xf1, sizeof (some_data)); 
@@ -33,9 +30,7 @@ memset_test
 
 }
 
-i32_t
-O_main
-(u0_t)
+i32_t O_main(u0_t)
 {
   strrchr_test();
   memset_test();

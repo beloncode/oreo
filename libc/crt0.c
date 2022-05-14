@@ -1,6 +1,6 @@
-/* This code is part of OREO project, all rights reserved to the owners
- * Wrote by: [Gabriel Correia]
- * Create at: 2022/04/27
+/* This code is part of oreo project, all rights reserved (See LICENSE)
+ * Wrote by: "Gabriel Correia"
+ * Created at: 2022/04/27
 */
 
 #include "crt.h"
@@ -20,16 +20,9 @@ extern i32_t O_main(i32_t argc, char_t **argv);
 
 #define WAIT_FOR_FDS 5000 /* 5 seconds */
 
-static u0_t
-__libc_before_exit
-(u0_t)
-{
-}
+static u0_t __libc_before_exit(u0_t) {}
 
-u0_t
-O__libc_start_main
-(i32_t argc, char_t **argv, char_t **env,
- i32_t (*main_callback)(i32_t, char_t **argv))
+u0_t O__libc_start_main(i32_t argc, char_t **argv, char_t **env, i32_t (*main_callback)(i32_t, char_t **argv))
 {
   O_atexit(__libc_before_exit);
 

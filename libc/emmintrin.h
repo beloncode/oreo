@@ -1,6 +1,6 @@
-/* This code is part of OREO project, all rights reserved to the owners
- * Wrote by: [Gabriel Correia]
- * Create at: 2022/04/29
+/* This code is part of oreo project, all rights reserved (See LICENSE)
+ * Wrote by: "Gabriel Correia"
+ * Created at: 2022/04/29
 */
 
 #ifndef EMMINTRIN_H
@@ -25,37 +25,28 @@ typedef long long __m128i __attribute__((__vector_size__ (16)));
 typedef long long __m128i_u __attribute__((__vector_size__(16), __aligned__(1)));
 
 /* Creates a vector of 16 bytes boundary with zeros value */
-extern __inline __m128i __attribute__((__gnu_inline__, __always_inline__, __artificial__))
-_mm_setzero_si128
-(u0_t)
+extern __inline __m128i __attribute__((__gnu_inline__, __always_inline__, __artificial__)) _mm_setzero_si128(u0_t)
 {
-  return (__extension__(__m128i)(__v4si){0, 0, 0, 0});
+  return __extension__(__m128i)(__v4si){0, 0, 0, 0};
 }
 
 /* Load 16 bytes from memory without alignment */
-extern __inline __m128i __attribute__((__gnu_inline__, __always_inline__, __artificial__))
-_mm_loadu_si128
-(__m128i_u const *dest)
+extern __inline __m128i __attribute__((__gnu_inline__, __always_inline__, __artificial__)) _mm_loadu_si128(__m128i_u const *dest)
 {
-  return (*dest);
+  return *dest;
 }
 
-extern __inline __m128i __attribute__((__gnu_inline__, __always_inline__, __artificial__))
-_mm_cmpeq_epi8
-(__m128i dest, __m128i src)
+extern __inline __m128i __attribute__((__gnu_inline__, __always_inline__, __artificial__)) _mm_cmpeq_epi8(__m128i dest, __m128i src)
 {
-  return ((__m128i)((__v16qi)dest == (__v16qi)src));
+  return (__m128i)((__v16qi)dest == (__v16qi)src);
 }
 
-extern __inline i32_t __attribute__((__gnu_inline__, __always_inline__, __artificial__))
-_mm_movemask_epi8
-(__m128i dest)
+extern __inline i32_t __attribute__((__gnu_inline__, __always_inline__, __artificial__)) _mm_movemask_epi8(__m128i dest)
 {
-  return (__builtin_ia32_pmovmskb128((__v16qi)dest));
+  return __builtin_ia32_pmovmskb128((__v16qi)dest);
 }
 
-extern __inline u0_t __attribute__((__gnu_inline__, __always_inline__, __artificial__))
-_mm_storeu_si128 (__m128i_u *dest, __m128i src)
+extern __inline u0_t __attribute__((__gnu_inline__, __always_inline__, __artificial__)) _mm_storeu_si128(__m128i_u *dest, __m128i src)
 {
   *dest = src;
 }

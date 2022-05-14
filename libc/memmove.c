@@ -1,6 +1,6 @@
-/* This code is part of OREO project, all rights reserved to the owners
- * Wrote by: [Gabriel Correia]
- * Create at: 2022/04/28
+/* This code is part of oreo project, all rights reserved (See LICENSE)
+ * Wrote by: "Gabriel Correia"
+ * Created at: 2022/04/28
 */
 
 #include "string.h"
@@ -15,9 +15,7 @@
  * basically a SWAP operation.
 */
 
-u0_t*
-O_memmove
-(u0_t *dest, const u0_t *src, mu64_t num)
+u0_t* O_memmove(u0_t *dest, const u0_t *src, mu64_t num)
 {
   u8_t *mem_copy = NULL;
   if (num < MAX_STACK_ALLOC_SIZE)
@@ -26,5 +24,5 @@ O_memmove
     exit(-1);
   O_memcpy(mem_copy, (u0_t*)src, num);
   O_memcpy(dest, mem_copy, num);
-  return (dest);
+  return dest;
 }

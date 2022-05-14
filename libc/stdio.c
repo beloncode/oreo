@@ -1,6 +1,6 @@
-/* This code is part of OREO project, all rights reserved to the owners
- * Wrote by: [Gabriel Correia]
- * Create at: 2022/04/28
+/* This code is part of oreo project, all rights reserved (See LICENSE)
+ * Wrote by: "Gabriel Correia"
+ * Created at: 2022/04/28
 */
 
 #include "stdio.h"
@@ -10,14 +10,12 @@
 
 #include "string.h"
 
-mu64_t 
-O_fwrite
-(const u0_t *ptr, mu64_t size, mu64_t nmemb, O_FILE *stream)
+mu64_t O_fwrite(const u0_t *ptr, mu64_t size, mu64_t nmemb, O_FILE *stream)
 {
   MUTEX_LOCK(&stream->file_lock);
 
   unlikely (stream == NULL || ptr == NULL)
-    return (-1);
+    return -1;
   
   mu64_t writed = 0;
 
@@ -26,45 +24,38 @@ O_fwrite
   }
   MUTEX_UNLOCK(&stream->file_lock);
 
-  return (writed);
+  return writed;
 }
 
 /* Returns the file descriptor associated with the O_FILE IO structure */
-i32_t
-O_fileno
-(const O_FILE *stream)
+i32_t O_fileno(const O_FILE *stream)
 {
   unlikely (stream == NULL)
-    return (-1);
-  return (__STATIC_O_FILENO(stream));
+    return -1;
+  return __STATIC_O_FILENO(stream);
 }
 
-i32_t
-O_fputc
-(i32_t ch, O_FILE *stream)
+i32_t O_fputc(i32_t ch, O_FILE *stream)
 {
+  i32_t ret = -1;
   unlikely (stream == NULL)
-    return (-1);
+    return ret;
   if (O_fwrite((char_t*)&ch, sizeof(char), 1, stream) != EOF)
-    return (ch);
+    ret = ch;
 
-  return (-1); 
+  return ret; 
 }
 
-i32_t
-O_fputs
-(const char_t *str, O_FILE *stream)
+i32_t O_fputs(const char_t *str, O_FILE *stream)
 {
   unlikely (stream == NULL)
-    return (-1);
+    return -1;
   i32_t writed = O_fwrite(str, O_strlen(str), 1, stream); 
   writed += O_fwrite("\n", 1, 1, stream);
-  return (writed);
+  return writed;
 }
 
-i32_t
-O_puts
-(const char_t *str)
+i32_t O_puts(const char_t *str)
 {
-  return (O_fputs(str, stdout)); 
+  return O_fputs(str, stdout); 
 }

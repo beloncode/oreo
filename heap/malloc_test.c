@@ -1,13 +1,11 @@
-/* This code is part of OREO project, all rights reserved to the owners
- * Wrote by: [Gabriel Correia]
+/* This code is part of oreo project, all rights reserved (See LICENSE)
+ * Wrote by: "Gabriel Correia"
  * Create at: 2022/06/13
 */
 
 #include "malloc_int.h"
 
-i32_t
-O_main
-(u0_t)
+i32_t O_main(u0_t)
 {
   char_t *data = O_malloc(10);
   O_memset(data, 'A', 5);

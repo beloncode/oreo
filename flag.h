@@ -1,6 +1,6 @@
-/* This code is part of OREO project, all rights reserved to the owners
- * Wrote by: [Gabriel Correia]
- * Create at: 2022/05/03
+/* This code is part of oreo project, all rights reserved (See LICENSE)
+ * Wrote by: "Gabriel Correia"
+ * Created at: 2022/05/03
 */
 
 #ifndef FLAG_H
@@ -29,7 +29,6 @@ struct flag_option
   } default_value;
 
   const char *option_comment;
-
 };
 
 enum flag_option_info 
