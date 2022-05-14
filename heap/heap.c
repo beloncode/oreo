@@ -55,7 +55,7 @@ struct block_header* heap_search_block(mu64_t size)
   struct free_list *list = malloc_int.free_list_heap;
   if (!list)
     return block;
-    
+   
   block = heap_search_select(list, size);
   return block;
 }

@@ -1,6 +1,6 @@
 /* This code is part of oreo project, all rights reserved (See LICENSE)
  * Wrote by: "Gabriel Correia"
- * Create at: 2022/05/14
+ * Created at: 2022/05/14
 */
 
 #ifndef HEAP_HEAP_H

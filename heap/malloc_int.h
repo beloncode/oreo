@@ -1,6 +1,6 @@
 /* This code is part of oreo project, all rights reserved (See LICENSE)
  * Wrote by: "Gabriel Correia"
- * Create at: 2022/05/06
+ * Created at: 2022/05/06
 */
 
 #ifndef HEAP_MALLOC_INT_H

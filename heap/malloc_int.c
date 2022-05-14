@@ -25,13 +25,6 @@ static inline mu64_t aling_size(mu64_t size)
   return (sizeof (u0_t*) + size - 1) & ~(sizeof (u0_t*) - 1);
 }
 
-struct malloc_int_header malloc_int = {
-  .malloc_mutex = MUTEX_INIT,
-  .base_address = NULL,
-  .free_list_heap = NULL,
-  .heap_size = 0
-};
-
 static struct block_header* malloc_request_memory(mu64_t size)
 {
   struct block_header *user_block = NULL;
@@ -89,3 +82,9 @@ u0_t O_free(u0_t *ptr)
 
 #undef BLK_HEADER_SIZE
 
+struct malloc_int_header malloc_int = {
+  .malloc_mutex = MUTEX_INIT,
+  .base_address = NULL,
+  .free_list_heap = NULL,
+  .heap_size = 0
+};

@@ -21,5 +21,5 @@ i32_t O_main(u0_t)
   data = O_malloc(11);
   O_free(data);
 
-  return (0);
+  return 0;
 }
