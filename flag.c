@@ -132,7 +132,7 @@ enum flag_status flag_parser(i32_t argc, char_t *argv[], flag_parser_t *flag)
       }
 
       if (opt_type_state == OPTION_SHORT)
-        if (O_strncmp(curr_option->short_option, curr_argv, 1) != 0) continue;
+        if (*curr_option->short_option != *curr_argv) continue;
       if (opt_type_state == OPTION_LONG)
         if (O_strncmp(curr_option->long_option, curr_argv, arg_value_pos) != 0) continue;
       
