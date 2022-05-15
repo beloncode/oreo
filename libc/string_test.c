@@ -15,7 +15,11 @@ u0_t strrchr_test(u0_t)
   char_t *lastest_char = O_strrchr(some_str, SEARCH_CHAR);
   EXPECT_EQ_CHAR(*lastest_char, SEARCH_CHAR);
   EXPECT_EQ(lastest_char - some_str, 29);
-  O_puts("Test> strrchar is ok");
+  O_puts("Test> O_strrchar is ok");
+
+  char_t TEST_ONE = 's', TEST_TWO = 's';
+  EXPECT_EQ(O_strncmp(&TEST_ONE, &TEST_TWO, 1), 0);
+  O_puts("Test> O_strncmp is ok");
 
 }
 u0_t memset_test(u0_t)
@@ -26,7 +30,7 @@ u0_t memset_test(u0_t)
   for (i32_t i_loop = 0; i_loop < sizeof (some_data); i_loop++)
     EXPECT_EQ(some_data[i_loop], 0xf1);
 
-  O_puts("Test> memset is ok");
+  O_puts("Test> O_memset is ok");
 
 }
 
