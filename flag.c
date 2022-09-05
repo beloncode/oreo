@@ -115,24 +115,26 @@ __attribute__((unused)) enum flagStatus flagParser(i32 argc, int8 *argv[], flagP
     }
 
     for (; arrayIndex < FLAG_OPTS_COUNT; arrayIndex++) {
-      struct flagOption *curr_option = *(flag->flagOptions + arrayIndex);
+      struct flagOption *currOption = *(flag->flagOptions + arrayIndex);
       enum flagOptionInfo type = *flag->flagInfos + arrayIndex;
       
-      if (curr_option == NULL) {
+      if (currOption == NULL) {
         flag->argNotFound = currArgv;
         return flag->status = FLAG_ARGNF;
       }
       if (optionType == OPTION_SHORT)
-        if (*curr_option->shortOption != *currArgv) continue;
+        if (*currOption->shortOption != *currArgv)
+          continue;
       if (optionType == OPTION_LONG)
-        if (oStrncmp(curr_option->longOption, currArgv, argValuePos) != 0) continue;
+        if (oStrncmp(currOption->longOption, currArgv, argValuePos) != 0)
+          continue;
       
       if (argValue && oStrlen(argValue) > 1)
-        flagProcessValue(curr_option, type, argValue);
+        flagProcessValue(currOption, type, argValue);
       else
         if (optionType == OPTION_WITH_VALUE)
           return flag->status = FLAG_ARGNP;
-      curr_option->execFuncHandler(currArgc, &currArgv, flag->restArgv);
+      currOption->execFuncHandler(currArgc, &currArgv, flag->restArgv);
       break;
     }
   }

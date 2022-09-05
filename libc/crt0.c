@@ -22,7 +22,7 @@ __attribute__((unused)) extern i32 oMain(i32 argc, int8 **argv);
 static u0 libcBeforeExit(u0) {}
 
 __attribute__((unused)) u0 oLibcStartMain(i32 argc, int8 **argv, __attribute__((unused)) int8 **env,
-                                          i32 (*main_callback)(i32, int8 **argv))
+                                          i32 (*mainCallback)(i32, int8 **argv))
 {
   libcBeforeExit();
 
@@ -51,9 +51,9 @@ __attribute__((unused)) u0 oLibcStartMain(i32 argc, int8 **argv, __attribute__((
     }
   }
 
-  i32 main_ret = main_callback(argc, argv);
+  i32 mainRet = mainCallback(argc, argv);
 
-  exit(main_ret);
+  exit(mainRet);
 
   /* __builtin_unreachable(); */
 }

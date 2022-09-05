@@ -10,7 +10,7 @@
 
 extern u0 (*gUserExitHandler)(u0);
 
-extern u0 oAtexit(u0 (*regCallback)(u0));
+__attribute__((unused)) extern u0 oAtExit(u0 (*regCallback)(u0));
 
 #endif
 

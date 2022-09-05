@@ -7,10 +7,10 @@
 
 #define STDOUT_FD 0
 
-struct _IO_O_FILE __stdout = {
+struct _IO_O_FILE rawStdout = {
   .filename = "stdout",
   .fileLock = MUTEX_INIT,
   .fd = STDOUT_FD
 };
 
-IOFILE *stdout = &__stdout;
+IOFILE *stdout = &rawStdout;

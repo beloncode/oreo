@@ -19,7 +19,7 @@ mu64 oFWrite(const u0 *ptr, mu64 size, mu64 nmemb, IOFILE *stream)
   
   mu64 wrote = 0;
 
-  for (mu64 i_loop = 0; i_loop < nmemb; i_loop++) {
+  for (mu64 iLoop = 0; iLoop < nmemb; iLoop++) {
     wrote += write(stream->fd, ptr, size);
   }
   MUTEX_UNLOCK(&stream->fileLock);

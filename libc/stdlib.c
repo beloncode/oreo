@@ -13,7 +13,7 @@ volatile u0 (*gUserExitHandler)(u0) = NULL;
 
 static mutex_t lock = MUTEX_INIT;
 
-u0 oAtexit(u0 (*regCallback)(u0))
+__attribute__((unused)) u0 oAtExit(u0 (*regCallback)(u0))
 {
   MUTEX_LOCK(&lock);
   gUserExitHandler = regCallback;
