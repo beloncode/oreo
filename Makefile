@@ -14,9 +14,9 @@ DBG?=gdb
 
 READELF=readelf
 
-FILL_ARGV?=
+FILLARGV=
 
-INCLUDE_DIR=$(shell pwd)
+INCLUDEDIR=$(shell pwd)
 
 CFLAGS=-Os\
 	-ggdb\
@@ -26,40 +26,40 @@ CFLAGS=-Os\
 	-Wno-builtin-declaration-mismatch\
 	-Wno-unknown-warning-option\
 	-Werror\
-	-I$(INCLUDE_DIR)\
+	-I$(INCLUDEDIR)\
 	-fPIC
 
 BIN=bin
 
 LIB=lib
 
-GIT_VER=$(shell git rev-parse --short HEAD)
+GITVER=$(shell git rev-parse --short HEAD)
 
-OREO_VER=0.0.2_$(GIT_VER)
+OREOVER=003.$(GITVER)
 
-ARCH=$(shell uname -m)
+ARCH=x86
 
-OREO_BIN=$(BIN)/oreo_$(OREO_VER)_$(ARCH)
+OREOBIN=$(BIN)/oreo$(OREOVER)$(ARCH)
 
-all: $(OREO_BIN)
+all: $(OREOBIN)
 
-run: $(OREO_BIN)
-	./$< $(FILL_ARGV)
+run: $(OREOBIN)
+	./$< $(FILLARGV)
 
-info: $(OREO_BIN)
+info: $(OREOBIN)
 	$(READELF) --relocs --dyn-syms --file-header --syms $<
 
-dbg: $(OREO_BIN)
+dbg: $(OREOBIN)
 	$(DBG) --args ./$< $(FILL_ARGV)
 
-LIBC_LIB=$(LIB)/libc_$(OREO_VER)_$(ARCH).a
-HEAP_LIB=$(LIB)/heap_$(OREO_VER)_$(ARCH).a
+LIBCLIB=$(LIB)/libc$(OREOVER)$(ARCH).a
+HEAPLIB=$(LIB)/heap$(OREOVER)$(ARCH).a
 
-HEAP_OBJS=\
-	heap/malloc_int.o\
+HEAPOBJS=\
+	heap/mallocInt.o\
 	heap/heap.o
 
-LIBC_OBJS=\
+LIBCOBJS=\
 	libc/crt0.o\
 	libc/features.o\
 	libc/strrchr.o\
@@ -77,26 +77,26 @@ LIBC_OBJS=\
 	libc/strcmp.o
 
 LIBRARIES=\
-	$(LIBC_LIB)\
-	$(HEAP_LIB)
+	$(LIBCLIB)\
+	$(HEAPLIB)
 
-$(HEAP_LIB): $(HEAP_OBJS)
+$(HEAPLIB): $(HEAPOBJS)
 	$(AR) rcs $@ $^
 
-$(LIBC_LIB): $(LIBC_OBJS)
+$(LIBCLIB): $(LIBCOBJS)
 	$(AR) rcs $@ $^
 
-TEST_STRING_OBJS=libc/string_test.o
-TEST_MALLOC_OBJS=heap/malloc_test.o
+TESTSTRINGOBJS=libc/stringTest.o
+TESTMALLOCOBJS=heap/mallocTest.o
 
-TEST_EXTRA_OBJS=test/expect.o fatal.o
+TESTEXTRAOBJS=test/expect.o fatal.o
 
-TEST_STRING=libc/string_test_$(OREO_VER)_$(ARCH)
-TEST_MALLOC=heap/malloc_test_$(OREO_VER)_$(ARCH)
+TESTSTRING=libc/stringTest.$(OREOVER)$(ARCH)
+TESTMALLOC=heap/mallocTest.$(OREOVER)$(ARCH)
 
-TEST_BINS=\
-	$(TEST_STRING)\
-	$(TEST_MALLOC)
+TESTBINS=\
+	$(TESTSTRING)\
+	$(TESTMALLOC)
 
 OREO_OBJS=\
 	test/expect.o\
@@ -105,19 +105,18 @@ OREO_OBJS=\
 	memory.o\
 	oreomain.o
 
-$(OREO_BIN): $(OREO_OBJS) $(LIBRARIES)
+$(OREOBIN): $(OREO_OBJS) $(LIBRARIES)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
-	wc -c $(OREO_BIN)
+	wc -c $(OREOBIN)
 
-$(TEST_STRING): $(TEST_STRING_OBJS) $(TEST_EXTRA_OBJS) $(LIBC_LIB)
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
-
-
-$(TEST_MALLOC): $(TEST_MALLOC_OBJS) $(TEST_EXTRA_OBJS) $(LIBC_LIB) $(HEAP_LIB)
+$(TESTSTRING): $(TESTSTRINGOBJS) $(TESTEXTRAOBJS) $(LIBCLIB)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
-test: $(TEST_BINS)
-	./$(TEST_STRING) && ./$(TEST_MALLOC)
+$(TESTMALLOC): $(TESTMALLOCOBJS) $(TESTEXTRAOBJS) $(LIBCLIB) $(HEAPLIB)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
+
+test: $(TESTBINS)
+	./$(TESTSTRING) && ./$(TESTMALLOC)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
@@ -127,14 +126,14 @@ party:
 		$(STRACE) ./party/puts_sys_test 2> ./party/puts_sys_test_strace
 
 clean:
-	@rm -f -v $(LIBC_OBJS)\
-		$(HEAP_OBJS)\
+	@rm -f -v $(LIBCOBJS)\
+		$(HEAPOBJS)\
 		$(OREO_OBJS)\
-		$(TEST_EXTRA_OBJS)\
-		$(OREO_BIN)\
-		$(TEST_BINS)\
-		$(TEST_STRING_OBJS)\
-		$(TEST_MALLOC_OBJS)\
+		$(TESTEXTRAOBJS)\
+		$(OREOBIN)\
+		$(TESTBINS)\
+		$(TESTSTRINGOBJS)\
+		$(TESTMALLOCOBJS)\
 		$(LIBRARIES)\
 		./party/puts_sys_test ./party/puts_sys_test_strace
 

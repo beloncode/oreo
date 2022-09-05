@@ -8,61 +8,61 @@
 #include "log/trace.h"
 #include "libc/unistd.h"
 
-struct block_header* heap_grow(mu64_t size)
+__attribute__((unused)) struct blockHeader* heapGrow(mu64 size)
 {
-  struct block_header *user_block = NULL;
+  struct blockHeader *userBlock = NULL;
 
   S_TRACE("Growing up the heap chunk");
-  
-  malloc_int.heap_size += size;
-  user_block = O_sbrk(size);
-  
-  mu64_t *size_ptr = &malloc_int.heap_size;
-  *size_ptr += size;
 
-  return user_block;
+  mallocIntHeader.heapSize += size;
+  userBlock = oSbrk(size);
+  
+  mu64 *sizePtr = &mallocIntHeader.heapSize;
+  *sizePtr += size;
+
+  return userBlock;
 }
 
-static struct block_header* heap_search_select(struct free_list *list, mu64_t size)
+static struct blockHeader* heapSearchSelect(struct freeList *list, mu64 size)
 {
-  struct block_header* block = (struct block_header*)list;
+  struct blockHeader* block = (struct blockHeader*)list;
 
   if (!list)
     return block;
 
-  mu64_t blk_size = block->blk_size;
+  mu64 blkSize = block->blkSize;
 
-  struct block_header *prev = NULL, *next = NULL;
+  struct blockHeader *prev = NULL, *next = NULL;
 
-  if (blk_size != size) {
-    if (blk_size < size)
-      next = heap_search_select(list->next, size);
-    else if (blk_size > size)
-      prev = heap_search_select(list->prev, size);
+  if (blkSize != size) {
+    if (blkSize < size)
+      next = heapSearchSelect(list->next, size);
+    else if (blkSize > size)
+      prev = heapSearchSelect(list->prev, size);
   }
 
-  if (next && next->blk_size >= size)
+  if (next && next->blkSize >= size)
     block = next;
-  else if (prev && prev->blk_size >= size)
+  else if (prev && prev->blkSize >= size)
     block = prev;
 
   return block;
 }
 
-struct block_header* heap_search_block(mu64_t size)
+__attribute__((unused)) struct blockHeader* heapSearchBlock(mu64 size)
 {
-  struct block_header *block = NULL;
-  struct free_list *list = malloc_int.free_list_heap;
+  struct blockHeader *block = NULL;
+  struct freeList *list = mallocIntHeader.freeListHeap;
   if (!list)
     return block;
    
-  block = heap_search_select(list, size);
+  block = heapSearchSelect(list, size);
   return block;
 }
 
-u0_t heap_remove(struct block_header *block)
+__attribute__((unused)) u0 heapRemove(struct blockHeader *block)
 {
-  struct free_list *free = (struct free_list*)block;
+  struct freeList *free = (struct freeList*)block;
 
   if (free->prev)
     /* free->prev->next == free; */
@@ -75,21 +75,21 @@ u0_t heap_remove(struct block_header *block)
     free->next->prev = free->prev;
 }
 
-u0_t heap_add(struct block_header *block)
+__attribute__((unused)) u0 heapAdd(struct blockHeader *block)
 {
-   /* Is the same as block->free_node */
-  struct free_list *free = (struct free_list*)block;
-  struct free_list **list = &malloc_int.free_list_heap;
+   /* Is the same as block->freeNode */
+  struct freeList *free = (struct freeList*)block;
+  struct freeList **list = &mallocIntHeader.freeListHeap;
 
   /* Get a block less or equal than the actual block size */
-  struct block_header *good_block = heap_search_select(*list, block->blk_size);
+  struct blockHeader *good_block = heapSearchSelect(*list, block->blkSize);
   /* 10 > */
   if (!good_block) {
-    *list = (struct free_list*)block;
+    *list = (struct freeList*)block;
     return;
   }
 
-  struct free_list *last = (struct free_list*)good_block;
+  struct freeList *last = (struct freeList*)good_block;
   free->prev = last->prev;
   free->next = last;
   last->prev = free;

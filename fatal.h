@@ -8,7 +8,7 @@
 
 #include "libc/stddef.h"
 
-extern u0_t fatal_error(const char_t *fmt, ...) __attribute__((noreturn));
+__attribute__((unused)) extern u0 fatalError(__attribute__((unused)) const int8 *fmt, ...) __attribute__((noreturn));
 
 #endif
 

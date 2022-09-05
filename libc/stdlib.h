@@ -8,9 +8,9 @@
 
 #include "stddef.h"
 
-extern u0_t (*g_user_exit_handler)(u0_t);
+extern u0 (*gUserExitHandler)(u0);
 
-extern u0_t O_atexit(u0_t (*reg_callback)(u0_t));
+extern u0 oAtexit(u0 (*regCallback)(u0));
 
 #endif
 

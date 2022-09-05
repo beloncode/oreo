@@ -5,40 +5,39 @@
 
 #include "unistd.h"
 
-#include "crt.h"
-
 #include "arch/asm.h"
 
 #include "stdlib.h"
 
-u0_t exit(i32_t code)
+u0 exit(i32 code)
 {
-  if (g_user_exit_handler)
-    g_user_exit_handler();
+  if (gUserExitHandler) {
+    gUserExitHandler();
+  }
 
-  __syscall1(SYS_EXIT, (u64_t)code);
+  __syscall1(SYS_EXIT, (u64)code);
 
   __builtin_unreachable();
 }
 
-mi64_t write(i32_t fd, const u0_t *buf, mu64_t count)
+mi64 write(i32 fd, const u0 *buf, mu64 count)
 {
-  return (mi64_t)__syscall3(SYS_WRITE, fd, (u64_t)buf, count);
+  return (mi64)__syscall3(SYS_WRITE, fd, (u64)buf, count);
 }
 
-#define DO_BRK(value) __syscall1(SYS_BRK, (u64_t)value)
+#define DO_BRK(value) __syscall1(SYS_BRK, (u64)(value))
 
-i32_t brk(u0_t *addr)
+__attribute__((unused)) i32 brk(u0 *addr)
 {
   return !DO_BRK(addr);
 }
 
 /* Increment the program data segment */
-u0_t* O_sbrk(mu64_t increment)
+u0* oSbrk(mu64 increment)
 {
-  u64_t brk_addr = DO_BRK(0);
-  u64_t new_brk = brk_addr + increment;
-  DO_BRK(new_brk);
-  return (u0_t*)brk_addr;
+  u64 brkAddr = DO_BRK(0);
+  u64 newBrk = brkAddr + increment;
+  DO_BRK(newBrk);
+  return (u0*)brkAddr;
 }
 

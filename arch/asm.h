@@ -7,7 +7,7 @@
 #define ARCH_ASM_H
 
 #include "systable.h"
-#include "asm_syscall.h"
+#include "asmSyscall.h"
 
 #endif
 

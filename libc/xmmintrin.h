@@ -8,7 +8,7 @@
 
 #include "libc/stddef.h"
 
-typedef f32_t __m128 __attribute__((__vector_size__(16)));
+typedef f32 __m128 __attribute__((__vector_size__(16)));
 
 #endif
 

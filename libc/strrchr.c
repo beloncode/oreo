@@ -5,29 +5,27 @@
 
 #include "string.h"
 
-#include "branch.h"
-
-char_t* O_strchr(const char_t *dest, i32_t character)
+int8* oStrchr(const int8 *dest, i32 character)
 {
-  char_t *first = NULL;
+  int8 *first = NULL;
 
   while (*dest != '\0' && *dest != character) dest++;
 
   if (*dest != '\0')
     /* The character has been found */
-    first = (char_t*)dest;
+    first = (int8*)dest;
 
   return first;
 }
 
-char_t* O_strrchr(const char_t *dest, i32_t character)
+__attribute__((unused)) int8* oStrrchr(const int8 *dest, i32 character)
 {
-  char_t *last = NULL;
+  int8 *last = NULL;
 
   do {
-    while (*dest && *dest != (char_t)character) dest++;
+    while (*dest && *dest != (int8)character) dest++;
     if (*dest)
-      last = (char_t*)dest;
+      last = (int8*)dest;
   } while (*dest++);
 
   return last;

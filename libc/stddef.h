@@ -9,43 +9,43 @@
 #include "stdint.h"
 #include "stdbool.h"
 
-#ifndef char_t
-typedef char char_t;
+#ifndef int8
+typedef char int8;
 #endif
 
-#ifndef uchar_t
-typedef unsigned char uchar_t;
+#ifndef uchar
+typedef unsigned char uint8;
 #endif
 
 #ifndef NULL
-#define NULL ((u0_t*)0)
+#define NULL ((u0*)0)
 #endif
 
-#ifndef u64ptr_t
-typedef unsigned long u64ptr_t;
+#ifndef u64ptr
+typedef unsigned long u64ptr;
 #endif
 
 #ifndef mu64_t
-typedef unsigned long mu64_t;
+typedef unsigned long mu64;
 #endif
 
-#ifndef mi64_t
-typedef signed long mi64_t;
+#ifndef mi64
+typedef signed long mi64;
 #endif
 
-#ifndef i8_t
-typedef signed char i8_t;
+#ifndef i8
+typedef signed char i8;
 #endif
 
-#ifndef u8_t
-typedef unsigned char u8_t;
+#ifndef u8
+typedef unsigned char u8;
 #endif
 
 /* The maximum bytes that alloca can allocate into the stack */
 #define MAX_STACK_ALLOC_SIZE 0x1ff
 
-#ifndef f32_t
-typedef float f32_t;
+#ifndef f32
+typedef float f32;
 #endif
 
 #endif

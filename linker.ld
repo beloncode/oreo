@@ -1,9 +1,9 @@
-ENTRY(O_start)
+ENTRY(oStart)
 STARTUP(libc/crt0.o)
 
 SECTIONS {
   .text (0x1000) : ALIGN(0x1000) {
-  __text__start = .;
+  textStart = .;
   *(.text)
   __text__end = .;
   }

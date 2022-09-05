@@ -6,8 +6,8 @@
 #ifndef LIBC_STDBOOL_H
 #define LIBC_STDBOOL_H
 
-#ifndef bool_t
-typedef unsigned bool_t;
+#ifndef bool
+typedef unsigned bool;
 #endif
 
 #define true 1

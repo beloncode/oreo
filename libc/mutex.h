@@ -12,17 +12,17 @@
 
 #define MUTEX_INIT 0
 
-typedef volatile _Atomic i32_t mutex_t;
+typedef volatile _Atomic i32 mutex_t;
 
-extern u0_t _mutex_lock(mutex_t *lock_address);
+extern u0 mutexLock(mutex_t *lockAddress);
 
-extern u0_t _mutex_unlock(mutex_t *lock_address);
+extern u0 mutexUnlock(mutex_t *lockAddress);
 
 #define MUTEX_LOCK(mutex)\
-  _mutex_lock(mutex)
+  mutexLock(mutex)
 
 #define MUTEX_UNLOCK(mutex)\
-  _mutex_unlock(mutex)
+  mutexUnlock(mutex)
 
 #endif
 

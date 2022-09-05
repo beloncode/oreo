@@ -5,45 +5,45 @@
 
 #include "crt.h"
 #include "unistd.h"
-#include "stdlib.h"
 #include "stdio.h"
 #include "poll.h"
 
 #include "bits/mask.h"
 
 /* Address of the initial code segment */
-extern u64ptr_t __text__start;
+__attribute__((unused)) extern u64ptr textStart;
 /* Address of the end */
-extern u64ptr_t __text_end;
+__attribute__((unused)) extern u64ptr textEnd;
 
-extern i32_t O_main(i32_t argc, char_t **argv);
+__attribute__((unused)) extern i32 oMain(i32 argc, int8 **argv);
 
 #define WAIT_FOR_FDS 5000 /* 5 seconds */
 
-static u0_t __libc_before_exit(u0_t) {}
+static u0 libcBeforeExit(u0) {}
 
-u0_t O__libc_start_main(i32_t argc, char_t **argv, char_t **env, i32_t (*main_callback)(i32_t, char_t **argv))
+__attribute__((unused)) u0 oLibcStartMain(i32 argc, int8 **argv, __attribute__((unused)) int8 **env,
+                                          i32 (*main_callback)(i32, int8 **argv))
 {
-  O_atexit(__libc_before_exit);
+  libcBeforeExit();
 
-  static struct O_pollfd std_IO__poll[] = {
+  static struct pollFD stdIOPoll[] = {
     /* Wait until the stdout is ready for write and check for possible errors */
     {STDOUT_FILENO, POLLPRI | POLLOUT},
     /* Check for some data and check for possible errors */
     {STDIN_FILENO,  POLLIN  | POLLPRI}
   };
-#define POOL_COUNT (sizeof(std_IO__poll)/sizeof(struct O_pollfd))
+  #define POOL_COUNT (sizeof(stdIOPoll)/sizeof(struct pollFD))
 
-  i32_t pret = O_poll(std_IO__poll, POOL_COUNT, WAIT_FOR_FDS);
-  if (pret == -1)
+  i32 pRet = oPoll(stdIOPoll, POOL_COUNT, WAIT_FOR_FDS);
+  if (pRet == -1)
     /* A error has occurred */ 
-    exit(pret);
+    exit(pRet);
 
-  if (pret > 0) {
-    /* Non zero poll return indicates that a entry in std_IO_poll as been filled with non-zeros values */
-    for (i32_t count_poll = 0; count_poll < POOL_COUNT; count_poll++) {
-      struct O_pollfd *test = &std_IO__poll[count_poll];
-      i16_t request = test->revents;
+  if (pRet > 0) {
+    /* Non-zero poll return indicates that an entry in stdIOPoll as been filled with non-zeros values */
+    for (i32 countPoll = 0; countPoll < POOL_COUNT; countPoll++) {
+      struct pollFD *test = &stdIOPoll[countPoll];
+      i16 request = test->rEvents;
       
       if (TEST_SPECIFIC_BIT(request, (POLLERR | POLLNVAL))) {
         exit(request);
@@ -51,26 +51,26 @@ u0_t O__libc_start_main(i32_t argc, char_t **argv, char_t **env, i32_t (*main_ca
     }
   }
 
-  i32_t main_ret = main_callback(argc, argv);
+  i32 main_ret = main_callback(argc, argv);
 
   exit(main_ret);
 
-  __builtin_unreachable();
+  /* __builtin_unreachable(); */
 }
 
 __asm__(
   ".intel_syntax noprefix\n"
-  ".globl O_start\n"
-  ".type O_start,@function\n"
-  "O_start:\n"
+  ".globl oStart\n"
+  ".type oStart,@function\n"
+  "oStart:\n"
   "xor rax, rax\n"
   "mov edi, [rsp]\n"
   "lea rsi, [rsp+8]\n"
   /* Calculating the effective address of environment variable array list */
   "lea rdx, [rsi+rdi*8]\n"
   "add rdx, 8\n"
-  "lea rcx, [O_main + rip]\n"
-  "call O__libc_start_main\n"
+  "lea rcx, [oMain + rip]\n"
+  "call oLibcStartMain\n"
 
   /* Unreachable code  */
   "add rax, 1\n"

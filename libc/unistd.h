@@ -8,13 +8,13 @@
 
 #include "stddef.h"
 
-extern u0_t exit(i32_t code) __attribute__((noreturn));
+extern u0 exit(i32 code) __attribute__((noreturn));
 
-extern mi64_t write(i32_t fd, const u0_t *buf, mu64_t count);
+extern mi64 write(i32 fd, const u0 *buf, mu64 count);
 
-extern i32_t brk(u0_t *addr);
+__attribute__((unused)) extern i32 brk(u0 *addr);
 
-extern u0_t* O_sbrk(mu64_t increment);
+extern u0* oSbrk(mu64 increment);
 
 #endif
 

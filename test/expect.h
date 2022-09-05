@@ -11,12 +11,12 @@
 
 #include "fatal.h"
 
-extern const char_t unexpected_str[];
+__attribute__((unused)) extern const int8 unexpectedStr[];
 
 #define EXPECT(expr)\
   do {\
     unlikely (!(expr)) {\
-    fatal_error(unexpected_str, #expr, __FILE__, __LINE__);\
+    fatalError(unexpectedStr, #expr, __FILE__, __LINE__);\
     __builtin_unreachable();\
     }\
   } while (0)

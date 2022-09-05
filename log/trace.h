@@ -9,7 +9,7 @@
 #include "libc/stdio.h"
 
 #define S_TRACE(msg)\
-  O_puts(msg)
+  oPuts(msg)
 
 #endif
 

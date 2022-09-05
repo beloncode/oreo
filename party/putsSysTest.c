@@ -1,6 +1,6 @@
 /* This code is part of oreo project, all rights reserved (See LICENSE)
  * Wrote by: "Gabriel Correia"
- * Created at: Unknow
+ * Created at: Unknown
 */
 
 #include <stdio.h>

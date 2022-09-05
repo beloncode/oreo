@@ -10,33 +10,33 @@
 
 #include "libc/stddef.h"
 
-struct flag_option
+struct flagOption
 {
   union {
-    bool_t    *as_bool;
-    u0_t      *as_ptr;
-  } arg_pointer;
+    bool    *asBool;
+    u0      *asPtr;
+  } argPointer;
 
-  u0_t (*exec_func_handler)(i32_t actual_argc, char_t **actual_argv, char_t **non_option);
+  u0 (*execFuncHandler)(i32 actualArgc, int8 **actualArgv, int8 **nonOption);
 
-  const char *long_option;
+  const char *longOption;
 
-  const char *short_option;
+  const char *shortOption;
 
   union {
-    bool_t    as_bool;
-    u0_t      *as_ptr;
-  } default_value;
+    bool asBool;
+    u0 *asPtr;
+  } defaultValue;
 
-  const char *option_comment;
+  const char *optionComment;
 };
 
-enum flag_option_info 
+enum flagOptionInfo
 {
   FLAG_TYPE_BOOLEAN = 0
 };
 
-enum flag_status
+enum flagStatus
 {
   FLAG_ITS_FINE = 0,
   FLAG_NA,
@@ -44,36 +44,38 @@ enum flag_status
   FLAG_ARGNP
 };
 
-typedef struct flag_parser
+typedef struct
 {
-  struct flag_option *flag_options[FLAG_OPTS_COUNT];
-  enum flag_option_info flag_infos[FLAG_OPTS_COUNT];
+  struct flagOption *flagOptions[FLAG_OPTS_COUNT];
+  enum flagOptionInfo flagInfos[FLAG_OPTS_COUNT];
 
-  enum flag_status status;
+  enum flagStatus status;
 
-  u8_t flag_index;
+  u8 flagIndex;
 
-  char_t **rest_argv;
-  i32_t rest_argc;
+  int8 **restArgv;
+  i32 restArgc;
 
-  char_t *program_exec_path;
-  char_t *consumed_arg;
+  int8 *programExecPath;
+  int8 *consumedArg;
 
-  char_t *arg_not_found;
+  int8 *argNotFound;
 
-} flag_parser_t;
+} flagParser_t;
 
-u0_t flag_reset(flag_parser_t *flag);
+u0 flagReset(flagParser_t *flag);
 
-u0_t flag_bool(struct flag_option *option, flag_parser_t *flag);
+u0 flagBool(struct flagOption *option, flagParser_t *flag);
 
-enum flag_status flag_parser(i32_t argc, char_t *argv[], flag_parser_t *flag);
+__attribute__((unused)) enum flagStatus flagParser(i32 argc, int8 *argv[], flagParser_t *flag);
 
-char_t* flag_arg_not_found(const flag_parser_t *flag);
-char_t* flag_exec_path(const flag_parser_t *flag);
-char_t** flag_non_args(const flag_parser_t *flag);
+__attribute__((unused)) int8* flagArgNotFound(const flagParser_t *flag);
 
-const char_t* flag_status_to_str(enum flag_status status);
+__attribute__((unused)) int8* flagExecPath(const flagParser_t *flag);
+
+__attribute__((unused)) int8** flagNonArgs(const flagParser_t *flag);
+
+const int8* flagStatusToStr(enum flagStatus status);
 
 #endif
 

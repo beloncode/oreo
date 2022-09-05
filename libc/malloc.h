@@ -6,7 +6,7 @@
 #ifndef LIBC_MALLOC_H
 #define LIBC_MALLOC_H
 
-#include "heap/malloc_int.h"
+#include "heap/mallocInt.h"
 
 #endif
 

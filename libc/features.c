@@ -6,9 +6,9 @@
 #include "stdio.h"
 #include "unistd.h"
 
-u0_t __attribute__((noreturn)) __stack_chk_fail(u0_t)
+__attribute__((unused)) u0 __attribute__((noreturn)) __stack_chk_fail(u0)
 {
-  exit(O_puts("Error: stack smashing detected"));
+  exit(oPuts("Error: stack smashing detected"));
   
 }
 

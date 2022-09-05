@@ -8,18 +8,18 @@
 
 #include "libc/stddef.h"
 
-static __inline u64_t __syscall1(u64_t num, u64_t rdi)
+static __inline u64 __syscall1(u64 num, u64 rdi)
 {
-  u64_t ret;
+  u64 ret;
   __asm__ __volatile__("syscall" : "=a"(ret) : "a"(num), "D"(rdi)
     : "rcx", "r11", "memory"
   );
   return ret;
 }
 
-static __inline u64_t __syscall3(u64_t num, u64_t rdi, u64_t rsi, u64_t rdx)
+static __inline u64 __syscall3(u64 num, u64 rdi, u64 rsi, u64 rdx)
 {
-  u64_t ret;
+  u64 ret;
   __asm__ __volatile__("syscall" : "=a"(ret) : "a"(num), "D"(rdi), "S"(rsi), "d"(rdx)
     : "rcx", "r11", "memory"
   );

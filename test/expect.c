@@ -5,6 +5,6 @@
 
 #include "expect.h"
 
-const char_t unexpected_str[] = "Unexpected assertion error on (%s) in %s:%d\n";
+__attribute__((unused)) const int8 unexpectedStr[] = "Unexpected assertion error on (%s) in %s:%d\n";
 
 

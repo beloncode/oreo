@@ -10,52 +10,52 @@
 
 #include "string.h"
 
-mu64_t O_fwrite(const u0_t *ptr, mu64_t size, mu64_t nmemb, O_FILE *stream)
+mu64 oFWrite(const u0 *ptr, mu64 size, mu64 nmemb, IOFILE *stream)
 {
-  MUTEX_LOCK(&stream->file_lock);
+  MUTEX_LOCK(&stream->fileLock);
 
   unlikely (stream == NULL || ptr == NULL)
     return -1;
   
-  mu64_t writed = 0;
+  mu64 wrote = 0;
 
-  for (mu64_t i_loop = 0; i_loop < nmemb; i_loop++) {
-    writed += write(stream->fd, ptr, size);
+  for (mu64 i_loop = 0; i_loop < nmemb; i_loop++) {
+    wrote += write(stream->fd, ptr, size);
   }
-  MUTEX_UNLOCK(&stream->file_lock);
+  MUTEX_UNLOCK(&stream->fileLock);
 
-  return writed;
+  return wrote;
 }
 
-/* Returns the file descriptor associated with the O_FILE IO structure */
-i32_t O_fileno(const O_FILE *stream)
+/* Returns the file descriptor associated with the IOFILE IO structure */
+__attribute__((unused)) i32 oFileno(const IOFILE *stream)
 {
   unlikely (stream == NULL)
     return -1;
   return __STATIC_O_FILENO(stream);
 }
 
-i32_t O_fputc(i32_t ch, O_FILE *stream)
+__attribute__((unused)) i32 oFPutc(i32 ch, IOFILE *stream)
 {
-  i32_t ret = -1;
+  i32 ret = -1;
   unlikely (stream == NULL)
     return ret;
-  if (O_fwrite((char_t*)&ch, sizeof(char), 1, stream) != EOF)
+  if (oFWrite((int8 *) &ch, sizeof(char), 1, stream) != EOF)
     ret = ch;
 
   return ret; 
 }
 
-i32_t O_fputs(const char_t *str, O_FILE *stream)
+i32 oFPuts(const int8 *str, IOFILE *stream)
 {
   unlikely (stream == NULL)
     return -1;
-  i32_t writed = O_fwrite(str, O_strlen(str), 1, stream); 
-  writed += O_fwrite("\n", 1, 1, stream);
-  return writed;
+  i32 wrote = (i32)oFWrite(str, oStrlen(str), 1, stream);
+  wrote += (i32)oFWrite("\n", 1, 1, stream);
+  return wrote;
 }
 
-i32_t O_puts(const char_t *str)
+i32 oPuts(const int8 *str)
 {
-  return O_fputs(str, stdout); 
+  return oFPuts(str, stdout);
 }

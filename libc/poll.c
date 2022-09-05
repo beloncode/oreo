@@ -8,8 +8,8 @@
 #include "arch/systable.h"
 #include "arch/asm.h"
 
-i32_t O_poll(struct O_pollfd *fds, nfds_t nfds, i32_t timeout)
+i32 oPoll(struct pollFD *fds, nFDs nfds, i32 timeout)
 {
   /* TODO: to set errno */
-  return (i32_t)__syscall3(SYS_POLL, (u64_t)fds, (u64_t)nfds, (u64_t)timeout);
+  return (i32)__syscall3(SYS_POLL, (u64)fds, (u64)nfds, (u64)timeout);
 }

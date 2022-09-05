@@ -4,3 +4,4 @@ peda*
 bin/*
 lib/*
 .gdb*
+.idea/*

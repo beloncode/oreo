@@ -8,9 +8,9 @@
 #include "libc/stdio.h"
 #include "libc/unistd.h"
 
-u0_t fatal_error(const char_t *fmt, ...)
+__attribute__((unused)) u0 fatalError(__attribute__((unused)) const int8 *fmt, ...)
 {
-  exit(O_puts("A fatal error has ocurred"));
+  exit(oPuts("A fatal error has occurred"));
 
 }
 

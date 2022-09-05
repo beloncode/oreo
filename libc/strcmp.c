@@ -4,23 +4,20 @@
 */
 
 #include "string.h"
-#include "libm/diff.h"
 
-i32_t O_strncmp(const char_t *dest, const char_t *src, mu64_t len)
+i32 oStrncmp(const int8 *dest, const int8 *src, mu64 len)
 {
-  const uchar_t *dest_s0 = (const uchar_t*)dest,
-    *src_s1 = (const uchar_t*)src;
-  while (len-- > 1 && *dest_s0 != '\0' && *src_s1 != '\0' && dest_s0++ == src_s1++) ;
-  return *dest_s0 - *src_s1;
+  const uint8 *destS0 = (const uint8*)dest,
+    *src_s1 = (const uint8*)src;
+  while (len-- > 1 && *destS0 != '\0' && *src_s1 != '\0' && destS0++ == src_s1++) ;
+  return *destS0 - *src_s1;
 }
 
-i32_t O_strcmp(const char_t *dest, const char_t *src)
+i32 oStrCmp(const int8 *dest, const int8 *src)
 {
-  //mu64_t len = O_min(O_strlen(dest), O_strlen(src));
-
-  const uchar_t *dest_s0 = (const uchar_t*)dest,
-    *src_s1 = (const uchar_t*)src;
-  while (/*len-- > 0 &&*/ *dest_s0 != '\0' && *src_s1 != '\0' && dest_s0++ == src_s1++) ;
-  return *dest_s0 - *src_s1;
+  const uint8 *destS0 = (const uint8*)dest,
+    *src_s1 = (const uint8*)src;
+  while (/*len-- > 0 &&*/ *destS0 != '\0' && *src_s1 != '\0' && destS0++ == src_s1++) ;
+  return *destS0 - *src_s1;
 }
 

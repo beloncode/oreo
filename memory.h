@@ -8,7 +8,7 @@
 
 #include "libc/stddef.h"
 
-u0_t* Zmem(u0_t *dest, mu64_t size);
+__attribute__((unused)) u0* zMem(u0 *dest, mu64 size);
 
 #endif
 

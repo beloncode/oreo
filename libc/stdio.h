@@ -12,32 +12,33 @@
 
 typedef struct _IO_O_FILE
 {
-  const char_t *filename;
+  const int8 *filename;
   /* Secure lock test-and-set for protect from race condition */
-  mutex_t file_lock;
+  mutex_t fileLock;
   /* Associated file descriptor with the FILE structure */
-  i32_t fd;
-} O_FILE;
+  i32 fd;
+} IOFILE;
 
 /* Captured std IO files */
-extern O_FILE *stdin;
-extern O_FILE *stdout;
+__attribute__((unused)) extern IOFILE *stdin;
+extern IOFILE *stdout;
 
-extern mu64_t O_fwrite(const u0_t *ptr, mu64_t size, mu64_t nmemb, O_FILE *stream);
+extern mu64 oFWrite(const u0 *ptr, mu64 size, mu64 nmemb, IOFILE *stream);
 
-extern i32_t O_fputs(const char_t *str, O_FILE *stream);
-extern i32_t O_puts(const char_t *str);
-extern i32_t O_fputc(i32_t ch, O_FILE *stream);
+extern i32 oFPuts(const int8 *str, IOFILE *stream);
+extern i32 oPuts(const int8 *str);
+
+__attribute__((unused)) extern i32 oFPutc(i32 ch, IOFILE *stream);
 
 #define STDOUT_FILENO 0
 #define STDIN_FILENO  1
 
-#define EOF -1
+#define EOF (-1)
 
 #define __STATIC_O_FILENO(stream)\
   stream->fd
 
-extern i32_t O_fileno(const O_FILE *stream);
+__attribute__((unused)) extern i32 oFileno(const IOFILE *stream);
 
 #endif
 

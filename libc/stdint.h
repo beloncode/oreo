@@ -6,20 +6,20 @@
 #ifndef LIBC_STDINT_H
 #define LIBC_STDINT_H
 
-#ifndef i32_t
-typedef int i32_t;
+#ifndef i32
+typedef int i32;
 #endif
 
-#ifndef i16_t
-typedef short i16_t;
+#ifndef i16
+typedef short i16;
 #endif
 
-#ifndef u64_t
-typedef unsigned long u64_t;
+#ifndef u64
+typedef unsigned long u64;
 #endif
 
-#ifndef u0_t
-typedef void u0_t;
+#ifndef u0
+typedef void u0;
 #endif
 
 #endif

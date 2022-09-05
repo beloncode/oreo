@@ -12,23 +12,23 @@
 #define POLLPRI    0x002
 #define POLLOUT    0x004
 #define POLLERR    0x008
-#define POLLHUP    0x010
+/* #define POLLHUP    0x010 */
 #define POLLNVAL   0x020
-#define POLLRDNORM 0x040
-#define POLLRDBAND 0x080
+/* #define POLLRDNORM 0x040 */
+/* #define POLLRDBAND 0x080 */
 
-struct O_pollfd
+struct pollFD
 {
   /* File descriptor for monitor */
-  i32_t fd;
-  /* Requested events */ 
-  i16_t events;
+  i32 fd;
+  /* Requested events */
+  i16 events;
   /* Returned events */
-  i16_t revents;
+  i16 rEvents;
 };
 
-typedef mu64_t nfds_t;
+typedef mu64 nFDs;
 
-extern i32_t O_poll(struct O_pollfd *fds, nfds_t nfds, i32_t timeout);
+extern i32 oPoll(struct pollFD *fds, nFDs nfds, i32 timeout);
 
 #endif

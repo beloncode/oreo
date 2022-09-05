@@ -6,14 +6,14 @@
 #ifndef HEAP_HEAP_H
 #define HEAP_HEAP_H
 
-#include "malloc_int.h"
+#include "mallocInt.h"
 
-extern struct block_header* heap_grow(mu64_t size);
+__attribute__((unused)) extern struct blockHeader* heapGrow(mu64 size);
 
-extern struct block_header* heap_search_block(mu64_t size);
+__attribute__((unused)) extern struct blockHeader* heapSearchBlock(mu64 size);
 
-extern u0_t heap_remove(struct block_header *block);
+__attribute__((unused)) extern u0 heapRemove(struct blockHeader *block);
 
-extern u0_t heap_add(struct block_header *block);
+__attribute__((unused)) extern u0 heapAdd(struct blockHeader *block);
 
 #endif

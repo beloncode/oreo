@@ -8,19 +8,20 @@
 
 #include "stddef.h"
 
-extern char_t* O_strrchr(const char_t* dest, i32_t character)
+__attribute__((unused)) extern int8* oStrrchr(const int8* dest, i32 character)
   __attribute__((nonnull(1)));
 
-extern char_t* O_strchr(const char_t *dest, i32_t character)
+extern int8* oStrchr(const int8 *dest, i32 character)
   __attribute__((nonnull(1)));
 
-extern i32_t O_strncmp(const char_t *dest, const char_t *src, mu64_t len);
-extern i32_t O_strcmp(const char_t *dest, const char_t *src);
+extern i32 oStrncmp(const int8 *dest, const int8 *src, mu64 len);
+extern i32 oStrCmp(const int8 *dest, const int8 *src);
 
-extern mu64_t O_strlen(const char_t *dest);
-extern u0_t* O_memmove (u0_t *dest, const u0_t *src, mu64_t num);
-extern u0_t* O_memcpy(u0_t *dest, u0_t *src, mu64_t num);
-extern u0_t* O_memset(u0_t *dest, i32_t constant, mu64_t num);
+extern mu64 oStrlen(const int8 *dest);
+
+__attribute__((unused)) extern u0* oMemMove(u0 *dest, const u0 *src, mu64 num);
+extern u0* oMemCpy(u0 *dest, u0 *src, mu64 num);
+extern u0* oMemset(u0 *dest, i32 constant, mu64 num);
 
 #endif
 

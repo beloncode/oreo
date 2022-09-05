@@ -5,19 +5,19 @@
 
 #include "libc/mutex.h"
 
-static i32_t __test_and_set(mutex_t *lock)
+static i32 testAndSet(mutex_t *lock)
 {
-  i32_t def_lock = *lock;
+  i32 defLock = *lock;
   *lock = 1;
-  return def_lock;
+  return defLock;
 }
 
-u0_t _mutex_lock(mutex_t *lock_address)
+u0 mutexLock(mutex_t *lockAddress)
 {
-  while (__test_and_set(lock_address) == 1);
+  while (testAndSet(lockAddress) == 1);
 }
 
-u0_t _mutex_unlock(mutex_t *lock_address)
+u0 mutexUnlock(mutex_t *lockAddress)
 {
-  *lock_address = 0;
+  *lockAddress = 0;
 }

@@ -6,22 +6,20 @@
 #include "string.h"
 #include "emmintrin.h"
 
-#include "xmmintrin.h"
-
-u0_t* O_memcpy(u0_t *dest, u0_t *src, mu64_t num)
+u0* oMemCpy(u0 *dest, u0 *src, mu64 num)
 {
-  __m128i *src_128 = (__m128i*)src;
-  __m128i *dest_128 = (__m128i*)dest;
+  __m128i *src128 = (__m128i*)src;
+  __m128i *dest128 = (__m128i*)dest;
 
-  mu64_t copied = 0;
+  mu64 copied = 0;
   for (; num - copied > sizeof (__m128i) && copied < num; copied += sizeof (__m128i))
-    _mm_storeu_si128(dest_128++, _mm_loadu_si128(src_128++));
+    _mm_storeu_si128(dest128++, _mm_loadu_si128(src128++));
 
-  u8_t *dest_ = dest + copied;
-  u8_t *src_ = src + copied;
+  u8 *destPtr = dest + copied;
+  u8 *srcPtr = src + copied;
 
   while (copied++ != num)
-    *dest_++ = *src_++;
+    *destPtr = *srcPtr++;
   
   return dest;
 }

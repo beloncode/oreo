@@ -9,8 +9,8 @@
 
 struct _IO_O_FILE __stdout = {
   .filename = "stdout",
-  .file_lock = MUTEX_INIT,
+  .fileLock = MUTEX_INIT,
   .fd = STDOUT_FD
 };
 
-O_FILE *stdout = &__stdout; 
+IOFILE *stdout = &__stdout;

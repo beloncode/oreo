@@ -8,7 +8,7 @@
 
 #include "libc/stddef.h"
 
-__inline mu64_t O_min(mu64_t x, mu64_t y)
+__inline mu64 oMin(mu64 x, mu64 y)
 {
   return x > y ? y : x;
 }

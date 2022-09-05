@@ -4,19 +4,18 @@
 */
 
 #include "mutex.h"
-#include "unistd.h"
 
 #if __clang__
-u0_t (*g_user_exit_handler)(u0_t) = NULL;
+u0 (*gUserExitHandler)(u0) = NULL;
 #else
-volatile u0_t (*g_user_exit_handler)(u0_t) = NULL;
+volatile u0 (*gUserExitHandler)(u0) = NULL;
 #endif
 
 static mutex_t lock = MUTEX_INIT;
 
-u0_t O_atexit(u0_t (*reg_callback)(u0_t))
+u0 oAtexit(u0 (*regCallback)(u0))
 {
   MUTEX_LOCK(&lock);
-  g_user_exit_handler = reg_callback;
+  gUserExitHandler = regCallback;
   MUTEX_UNLOCK(&lock);
 }
